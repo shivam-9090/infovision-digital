@@ -193,7 +193,7 @@ export const Contact: React.FC = () => {
                 <CardBody>
                   <h3>Contact Information</h3>
                   <div className="contact-item">
-                    <div className="contact-item__icon"></div>
+                    <div className="contact-item__icon">✉️</div>
                     <div className="contact-item__content">
                       <h4>Email</h4>
                       <a href="mailto:infovision@gmail.com">
@@ -203,7 +203,7 @@ export const Contact: React.FC = () => {
                   </div>
 
                   <div className="contact-item">
-                    <div className="contact-item__icon"></div>
+                    <div className="contact-item__icon">📱</div>
                     <div className="contact-item__content">
                       <h4>Mobile</h4>
                       <a href="tel:+918780546982">+91 8780546982</a>

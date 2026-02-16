@@ -722,7 +722,6 @@ export const CaseStudy: React.FC = () => {
       <section className="case-study-hero">
         <div className="container">
           <div className="case-study-hero__content">
-            <div className="case-study-hero__icon">{study.heroImage}</div>
             <span className="case-study-hero__category">{study.category}</span>
             <h1 className="case-study-hero__title">{study.title}</h1>
             <p className="case-study-hero__tagline">{study.tagline}</p>

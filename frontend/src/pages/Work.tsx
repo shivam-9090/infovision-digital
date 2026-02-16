@@ -1,6 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Card, CardBody } from "../components/Card";
+import {
+  FaBrain,
+  FaPalette,
+  FaBolt,
+  FaShoppingCart,
+  FaMobileAlt,
+  FaCube,
+  FaChartLine,
+  FaExternalLinkAlt,
+  FaArrowRight,
+} from "react-icons/fa";
 import "./Work.css";
 
 const projects = [
@@ -11,7 +22,7 @@ const projects = [
     description:
       "Complete Customer Relationship Management system built with Next.js frontend and NestJS backend. Features authentication, workspace management, deals pipeline, and real-time analytics.",
     tags: ["Next.js", "NestJS", "TypeScript", "Docker"],
-    icon: "",
+    icon: <FaChartLine size={24} />,
     liveUrl: "https://crm.infovision.digital/",
     metrics: [
       { label: "Stack", value: "Full Stack" },
@@ -25,7 +36,7 @@ const projects = [
     description:
       "Large language model with 4.5 billion parameters trained for advanced natural language understanding and generation. Published on Hugging Face with full model weights and documentation.",
     tags: ["AI", "LLM", "Transformers", "PyTorch"],
-    icon: "🤖",
+    icon: <FaBrain size={24} />,
     liveUrl: "https://huggingface.co/shivam909067/Infovision-gpt-4.5B",
     metrics: [
       { label: "Parameters", value: "4.5B" },
@@ -39,7 +50,7 @@ const projects = [
     description:
       "Advanced AI image generation model specialized in creating artistic and creative visuals. Fine-tuned diffusion model for high-quality image synthesis with diverse artistic styles.",
     tags: ["AI", "Image Generation", "Diffusion", "Computer Vision"],
-    icon: "🎨",
+    icon: <FaPalette size={24} />,
     liveUrl: "https://huggingface.co/shivam909067/Image-gen-art-01",
     metrics: [
       { label: "Type", value: "Gen AI" },
@@ -53,7 +64,7 @@ const projects = [
     description:
       "First generation foundational AI model focused on specialized language tasks. Open-source contribution to the Hugging Face community with comprehensive model card.",
     tags: ["AI", "Deep Learning", "Open Source", "NLP"],
-    icon: "⚡",
+    icon: <FaBolt size={24} />,
     liveUrl: "https://huggingface.co/shivam909067/Sifera-V1",
     metrics: [
       { label: "Version", value: "V1" },
@@ -67,7 +78,7 @@ const projects = [
     description:
       "Modern e-commerce platform for handmade flowers and botanical products. Features product catalog, shopping cart, responsive design, and seamless checkout experience.",
     tags: ["E-commerce", "React", "Netlify", "Web"],
-    icon: "",
+    icon: <FaShoppingCart size={24} />,
     liveUrl: "https://exorav.netlify.app",
     metrics: [
       { label: "Type", value: "E-commerce" },
@@ -81,7 +92,7 @@ const projects = [
     description:
       "Cross-platform mobile application built with Expo React Native and TypeScript. Features Firebase authentication, real-time database, cloud storage, and Material Design 3 UI.",
     tags: ["React Native", "Expo", "TypeScript", "Firebase"],
-    icon: "",
+    icon: <FaMobileAlt size={24} />,
     liveUrl: "#apk",
     metrics: [
       { label: "TypeScript", value: "97.3%" },
@@ -95,7 +106,7 @@ const projects = [
     description:
       "Interactive 3D McLaren GT experience with Three.js and GSAP. Features cinematic camera animations, 7 interactive positions, touch gestures, color customization, and adaptive quality controls.",
     tags: ["Three.js", "GSAP", "3D", "WebGL"],
-    icon: "",
+    icon: <FaCube size={24} />,
     liveUrl: "https://mclaren-vision.netlify.app/",
     metrics: [
       { label: "Positions", value: "7" },
@@ -114,12 +125,12 @@ export const Work: React.FC = () => {
             A collection of production applications showcasing full-stack
             development expertise
           </p>
-          <p>
+          <p className="work-header__contact-text">
             Need similar results? Review our{" "}
             <Link to="/services">services</Link> and{" "}
             <Link to="/contact">start a project discussion</Link>.
           </p>
-          <p>
+          <p className="work-header__desc-text">
             Explore detailed case studies for architecture decisions,
             implementation approach, and measurable delivery outcomes across
             web, mobile, AI, and 3D projects.
@@ -131,65 +142,91 @@ export const Work: React.FC = () => {
         <div className="container">
           <div className="work-projects grid grid--2">
             {projects.map((project) => (
-              <div key={project.id} className="project-card-wrapper">
-                <Card variant="hover" className="project-card">
+              <div
+                key={project.id}
+                className="project-card-wrapper"
+                role="button"
+                tabIndex={0}
+                style={{ cursor: "pointer" }}
+                onClick={(e) => {
+                  // Prevent navigation if clicking on a button or link inside the card
+                  if (
+                    (e.target as HTMLElement).closest("a") ||
+                    (e.target as HTMLElement).closest("button")
+                  ) {
+                    return;
+                  }
+                  if (project.liveUrl !== "#apk") {
+                    window.open(
+                      project.liveUrl,
+                      "_blank",
+                      "noopener,noreferrer",
+                    );
+                  }
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    if (project.liveUrl !== "#apk") {
+                      window.open(
+                        project.liveUrl,
+                        "_blank",
+                        "noopener,noreferrer",
+                      );
+                    }
+                  }
+                }}
+              >
+                <Card variant="bordered" className="project-card">
                   <CardBody className="project-card__body">
-                    <div className="project-card__content">
-                      <h3 className="project-card__title">
-                        {project.liveUrl === "#apk" ? (
-                          project.title
-                        ) : (
-                          <a
-                            href={project.liveUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="project-card__github"
-                          >
-                            {project.title}
-                          </a>
-                        )}
-                      </h3>
-                      <p className="project-card__description">
-                        {project.description}
-                      </p>
+                    <div className="project-card__header">
+                      <div className="project-card__icon-wrapper">
+                        {project.icon}
+                      </div>
+                      <div className="project-card__title-row">
+                        <h3 className="project-card__title">{project.title}</h3>
+                      </div>
                     </div>
+
+                    <p className="project-card__description">
+                      {project.description}
+                    </p>
+
+                    <div className="project-card__metrics">
+                      {project.metrics.map((metric, index) => (
+                        <div key={index} className="metric-item">
+                          <span className="metric-label">{metric.label}</span>
+                          <span className="metric-value">{metric.value}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="project-card__tags">
+                      {project.tags.map((tag) => (
+                        <span key={tag} className="project-tag">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
                     <div className="project-card__actions">
-                      {project.caseStudyId ? (
+                      {project.caseStudyId && (
                         <Link
                           to={`/case-study/${project.caseStudyId}`}
-                          className="project-card__github"
+                          className="action-btn action-btn--primary"
                         >
-                          Read Case Study →
+                          Case Study <FaArrowRight />
                         </Link>
-                      ) : null}
+                      )}
 
                       {project.liveUrl === "#apk" ? (
                         <a
                           href="/app-release.apk"
                           download="appexorbit.apk"
-                          className="project-card__github"
+                          className="action-btn action-btn--outline"
                         >
-                          Download APK ↗
+                          Download APK
                         </a>
-                      ) : project.liveUrl.includes("huggingface.co") ? (
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="project-card__github"
-                        >
-                          View on HF 🤗 ↗
-                        </a>
-                      ) : (
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="project-card__github"
-                        >
-                          Live Site ↗
-                        </a>
-                      )}
+                      ) : null}
                     </div>
                   </CardBody>
                 </Card>

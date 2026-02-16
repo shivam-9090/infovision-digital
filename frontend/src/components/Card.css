@@ -1,16 +1,16 @@
-/* Modern Card Design System */
+/* Modern Card Design System - Enterprise Clean */
 .card {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-radius: 16px;
+  border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
 
-/* Subtle inner glow */
+/* Subtle inner glow - White/Neutral only */
 .card::before {
   content: "";
   position: absolute;
@@ -19,7 +19,7 @@
   padding: 1px;
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.08) 0%,
     transparent 50%,
     transparent 100%
   );
@@ -31,7 +31,7 @@
 }
 
 .card--default {
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
 }
 
 .card--hover {
@@ -39,27 +39,40 @@
 }
 
 .card--hover:hover {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
   border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25),
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3),
     0 0 0 1px rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .card--hover:hover::before {
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.15) 0%,
-    rgba(77, 141, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 50%,
     transparent 100%
   );
 }
 
+/* Neutral Bordered Variant - No Blue */
 .card--bordered {
-  border: 1px solid rgba(77, 141, 255, 0.3);
+  background: rgba(20, 20, 20, 0.6); /* Slightly darker/solid for contrast */
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .card--bordered:hover {
-  border-color: rgba(77, 141, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Common Text Styles for Cards (Optional helper) */
+.card h3 {
+  color: #fff;
+  font-weight: 600;
+}
+
+.card p {
+  color: #a1a1aa; /* Zinc-400 */
 }
 
 /* Card sections */
@@ -75,7 +88,7 @@
 .card__footer {
   padding: 1rem 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 /* Card with image */
@@ -88,6 +101,7 @@
   height: 200px;
   object-fit: cover;
   display: block;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 /* Overlay variant */
@@ -102,15 +116,15 @@
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    rgba(0, 0, 0, 0.6) 100%
+    rgba(0, 0, 0, 0.8) 100%
   );
-  opacity: 0;
+  opacity: 0.8;
   transition: opacity 0.3s ease;
   pointer-events: none;
 }
 
 .card--overlay:hover::after {
-  opacity: 1;
+  opacity: 0.9;
 }
 
 /* Responsive */
