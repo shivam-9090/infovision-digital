@@ -1,0 +1,104 @@
+.legal-page {
+  min-height: 100vh;
+}
+
+.legal-header {
+  padding: var(--space-4xl) 0 var(--space-2xl);
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.legal-header h1 {
+  font-size: var(--font-size-4xl);
+  margin-bottom: var(--space-md);
+  color: var(--color-text-primary);
+}
+
+.last-updated {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+  font-style: italic;
+}
+
+.legal-content {
+  padding: var(--space-4xl) 0;
+}
+
+.legal-article {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.legal-article h2 {
+  font-size: var(--font-size-2xl);
+  margin: var(--space-2xl) 0 var(--space-md);
+  color: var(--color-text-primary);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.legal-article h3 {
+  font-size: var(--font-size-lg);
+  margin: var(--space-lg) 0 var(--space-md);
+  color: var(--color-text-primary);
+}
+
+.legal-article p {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-md);
+}
+
+.legal-article ul {
+  margin: var(--space-md) 0 var(--space-lg) var(--space-lg);
+  list-style-type: disc;
+}
+
+.legal-article li {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-sm);
+  line-height: var(--line-height-relaxed);
+}
+
+.legal-article a {
+  color: var(--color-accent-primary);
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+
+.legal-article a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+.legal-article strong {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .legal-header {
+    padding: var(--space-2xl) 0 var(--space-lg);
+  }
+
+  .legal-header h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .legal-article h2 {
+    font-size: var(--font-size-lg);
+  }
+
+  .legal-article p,
+  .legal-article li {
+    font-size: var(--font-size-sm);
+  }
+
+  .legal-content {
+    padding: var(--space-2xl) 0;
+  }
+}

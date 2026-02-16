@@ -1,0 +1,5 @@
+# LLM access policy file for InfoVision
+# Keep this file separate from robots.txt (robots does not support LLM-Policy directives).
+
+User-agent: *
+Allow: /

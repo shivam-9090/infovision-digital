@@ -1,0 +1,191 @@
+.work-page {
+  min-height: 100vh;
+}
+
+.work-header {
+  text-align: center;
+  padding: var(--space-3xl) 0 var(--space-xl);
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.work-header h1 {
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  margin-bottom: var(--space-md);
+  color: var(--color-text-primary);
+  text-shadow: var(--glow-primary);
+}
+
+.work-header__subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  max-width: 700px;
+  margin: 0 auto;
+  font-style: italic;
+}
+
+/* Project Cards */
+.work-projects {
+  margin-top: var(--space-2xl);
+}
+
+.project-card-wrapper {
+  cursor: pointer;
+  height: 100%;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.project-card__body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.project-card__content {
+  flex-grow: 1;
+}
+
+/* Subtle inner glow */
+.project-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.project-card-wrapper:hover .project-card {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.project-card__title {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--space-md);
+  color: var(--color-text-primary);
+  padding: 0 var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.project-card__description {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-lg);
+  line-height: var(--line-height-relaxed);
+  padding: 0 var(--space-lg);
+  min-height: 120px;
+}
+
+.project-card__metrics {
+  display: flex;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-lg);
+  padding: var(--space-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.project-card__actions {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 var(--space-lg) var(--space-lg);
+  margin-top: auto;
+}
+
+.project-card__link,
+.project-card__github {
+  font-weight: 600;
+  color: var(--color-accent-primary);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius-full);
+  background: rgba(77, 141, 255, 0.1);
+}
+
+.project-card__link:hover,
+.project-card__github:hover {
+  color: #fff;
+  background: var(--color-accent-primary);
+  box-shadow: var(--glow-primary);
+  text-decoration: none;
+}
+
+.project-card__github {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+/* Empty State */
+.work-empty {
+  text-align: center;
+  padding: var(--space-4xl) var(--space-lg);
+  color: var(--color-text-secondary);
+}
+
+.work-empty h3 {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--space-md);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .work-header h1 {
+    font-size: var(--font-size-4xl);
+  }
+
+  .work-header__subtitle {
+    font-size: var(--font-size-base);
+  }
+
+  .work-filters {
+    top: 68px;
+  }
+
+  .filter-buttons {
+    justify-content: flex-start;
+  }
+
+  .filter-btn {
+    font-size: var(--font-size-xs);
+    padding: var(--space-xs) var(--space-md);
+  }
+
+  .project-card__metrics {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .project-card__actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

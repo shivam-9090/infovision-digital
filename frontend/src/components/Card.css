@@ -1,0 +1,130 @@
+/* Modern Card Design System */
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+/* Subtle inner glow */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.card--default {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+}
+
+.card--hover {
+  cursor: pointer;
+}
+
+.card--hover:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.card--hover:hover::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(77, 141, 255, 0.1) 50%,
+    transparent 100%
+  );
+}
+
+.card--bordered {
+  border: 1px solid rgba(77, 141, 255, 0.3);
+}
+
+.card--bordered:hover {
+  border-color: rgba(77, 141, 255, 0.5);
+}
+
+/* Card sections */
+.card__header {
+  padding: 1.5rem 1.5rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.card__body {
+  padding: 1.5rem;
+}
+
+.card__footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.15);
+}
+
+/* Card with image */
+.card--image {
+  position: relative;
+}
+
+.card--image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Overlay variant */
+.card--overlay {
+  position: relative;
+}
+
+.card--overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.card--overlay:hover::after {
+  opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card {
+    border-radius: 12px;
+  }
+
+  .card__header,
+  .card__body {
+    padding: 1.25rem;
+  }
+
+  .card__footer {
+    padding: 1rem 1.25rem;
+  }
+}

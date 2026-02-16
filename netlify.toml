@@ -1,0 +1,79 @@
+# Netlify Configuration File
+[build]
+  # Directory with the code to build
+  base = "frontend"
+  
+  # Build command
+  command = "npm run build"
+  
+  # Directory with the built files (Vite default output)
+  publish = "dist"
+
+# Redirect all requests to index.html for client-side routing (React Router)
+# This must be last rule to act as catch-all
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy-policy"
+  status = 301
+
+[[redirects]]
+  from = "/terms"
+  to = "/terms-of-service"
+  status = 301
+
+[[redirects]]
+  from = "/terms-and-conditions"
+  to = "/terms-of-service"
+  status = 301
+
+[[redirects]]
+  from = "/terms-and-condition"
+  to = "/terms-of-service"
+  status = 301
+
+[[redirects]]
+  from = "/cookie-policy"
+  to = "/cookies"
+  status = 301
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Environment variables (optional - can also be set in Netlify UI)
+# [build.environment]
+#   NODE_VERSION = "20"
+
+# Headers for better security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Robots-Tag = "index, follow, max-image-preview:large"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+    Cache-Control = "public, max-age=300, must-revalidate"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=utf-8"
+    Cache-Control = "public, max-age=300, must-revalidate"
+
+[[headers]]
+  for = "/llms.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+    Cache-Control = "public, max-age=300, must-revalidate"
