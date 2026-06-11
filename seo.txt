@@ -1,443 +1,404 @@
-import LogoLoop from './LogoLoop';
-import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
+I checked the site. Since this is a **business portfolio/agency website**, your SEO strategy should be completely different from CatalStudio or Nivasetu.
 
-const techLogos = [
-  { node: <SiReact />, title: "React", href: "https://react.dev" },
-  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
-  { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
-  { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
-];
+Your goal is:
 
-// Alternative with image sources
-const imageLogos = [
-  { src: "/logos/company1.png", alt: "Company 1", href: "https://company1.com" },
-  { src: "/logos/company2.png", alt: "Company 2", href: "https://company2.com" },
-  { src: "/logos/company3.png", alt: "Company 3", href: "https://company3.com" },
-];
+```text
+Google Ranking
+↓
+Service Pages
+↓
+Case Studies
+↓
+Blog Content
+↓
+Lead Generation
+↓
+Client Calls
+```
 
-function App() {
-  return (
-    <div style={{ height: '200px', position: 'relative', overflow: 'hidden'}}>
-      {/* Basic horizontal loop */}
-      <LogoLoop
-        logos={techLogos}
-        speed={120}
-        direction="left"
-        logoHeight={48}
-        gap={40}
-        hoverSpeed={0}
-        scaleOnHover
-        fadeOut
-        fadeOutColor="#ffffff"
-        ariaLabel="Technology partners"
-      />
-      
-      {/* Vertical loop with deceleration on hover */}
-      <LogoLoop
-        logos={techLogos}
-        speed={80}
-        direction="up"
-        logoHeight={48}
-        gap={40}
-        hoverSpeed={20}
-        fadeOut
-      />
-    </div>
-  );
-}
+Most agency websites make the mistake of having:
 
+```text
+Home
+About
+Services
+Contact
+```
 
-==> usage 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import './LogoLoop.css';
+and then wonder why Google sends no traffic.
 
-export type LogoItem =
-  | {
-      node: React.ReactNode;
-      href?: string;
-      title?: string;
-      ariaLabel?: string;
-    }
-  | {
-      src: string;
-      alt?: string;
-      href?: string;
-      title?: string;
-      srcSet?: string;
-      sizes?: string;
-      width?: number;
-      height?: number;
-    };
+---
 
-export interface LogoLoopProps {
-  logos: LogoItem[];
-  speed?: number;
-  direction?: 'left' | 'right' | 'up' | 'down';
-  width?: number | string;
-  logoHeight?: number;
-  gap?: number;
-  pauseOnHover?: boolean;
-  hoverSpeed?: number;
-  fadeOut?: boolean;
-  fadeOutColor?: string;
-  scaleOnHover?: boolean;
-  renderItem?: (item: LogoItem, key: React.Key) => React.ReactNode;
-  ariaLabel?: string;
-  className?: string;
-  style?: React.CSSProperties;
-}
+# What You Need To Build
 
-const ANIMATION_CONFIG = {
-  SMOOTH_TAU: 0.25,
-  MIN_COPIES: 2,
-  COPY_HEADROOM: 2
-} as const;
+## Main Pages
 
-const toCssLength = (value?: number | string): string | undefined =>
-  typeof value === 'number' ? `${value}px` : (value ?? undefined);
+```text
+/
+about
+contact
+portfolio
+case-studies
+blog
+pricing
+careers
+```
 
-const useResizeObserver = (
-  callback: () => void,
-  elements: Array<React.RefObject<Element | null>>,
-  dependencies: React.DependencyList
-) => {
-  useEffect(() => {
-    if (!window.ResizeObserver) {
-      const handleResize = () => callback();
-      window.addEventListener('resize', handleResize);
-      callback();
-      return () => window.removeEventListener('resize', handleResize);
-    }
+---
 
-    const observers = elements.map(ref => {
-      if (!ref.current) return null;
-      const observer = new ResizeObserver(callback);
-      observer.observe(ref.current);
-      return observer;
-    });
+## Service Pages (Most Important)
 
-    callback();
+Each service gets its own page.
 
-    return () => {
-      observers.forEach(observer => observer?.disconnect());
-    };
-  }, dependencies);
-};
+Example:
 
-const useImageLoader = (
-  seqRef: React.RefObject<HTMLUListElement | null>,
-  onLoad: () => void,
-  dependencies: React.DependencyList
-) => {
-  useEffect(() => {
-    const images = seqRef.current?.querySelectorAll('img') ?? [];
+```text
+/services/web-development
 
-    if (images.length === 0) {
-      onLoad();
-      return;
-    }
+/services/mobile-app-development
 
-    let remainingImages = images.length;
-    const handleImageLoad = () => {
-      remainingImages -= 1;
-      if (remainingImages === 0) {
-        onLoad();
-      }
-    };
+/services/flutter-development
 
-    images.forEach(img => {
-      const htmlImg = img as HTMLImageElement;
-      if (htmlImg.complete) {
-        handleImageLoad();
-      } else {
-        htmlImg.addEventListener('load', handleImageLoad, { once: true });
-        htmlImg.addEventListener('error', handleImageLoad, { once: true });
-      }
-    });
+/services/ui-ux-design
 
-    return () => {
-      images.forEach(img => {
-        img.removeEventListener('load', handleImageLoad);
-        img.removeEventListener('error', handleImageLoad);
-      });
-    };
-  }, dependencies);
-};
+/services/ecommerce-development
 
-const useAnimationLoop = (
-  trackRef: React.RefObject<HTMLDivElement | null>,
-  targetVelocity: number,
-  seqWidth: number,
-  seqHeight: number,
-  isHovered: boolean,
-  hoverSpeed: number | undefined,
-  isVertical: boolean
-) => {
-  const rafRef = useRef<number | null>(null);
-  const lastTimestampRef = useRef<number | null>(null);
-  const offsetRef = useRef(0);
-  const velocityRef = useRef(0);
+/services/seo-services
 
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
+/services/digital-marketing
 
-    const seqSize = isVertical ? seqHeight : seqWidth;
+/services/custom-software-development
 
-    if (seqSize > 0) {
-      offsetRef.current = ((offsetRef.current % seqSize) + seqSize) % seqSize;
-      const transformValue = isVertical
-        ? `translate3d(0, ${-offsetRef.current}px, 0)`
-        : `translate3d(${-offsetRef.current}px, 0, 0)`;
-      track.style.transform = transformValue;
-    }
+/services/cloud-consulting
 
-    const animate = (timestamp: number) => {
-      if (lastTimestampRef.current === null) {
-        lastTimestampRef.current = timestamp;
-      }
+/services/ai-development
+```
 
-      const deltaTime = Math.max(0, timestamp - lastTimestampRef.current) / 1000;
-      lastTimestampRef.current = timestamp;
+Each page should target its own keyword.
 
-      const target = isHovered && hoverSpeed !== undefined ? hoverSpeed : targetVelocity;
+---
 
-      const easingFactor = 1 - Math.exp(-deltaTime / ANIMATION_CONFIG.SMOOTH_TAU);
-      velocityRef.current += (target - velocityRef.current) * easingFactor;
+## Location Pages
 
-      if (seqSize > 0) {
-        let nextOffset = offsetRef.current + velocityRef.current * deltaTime;
-        nextOffset = ((nextOffset % seqSize) + seqSize) % seqSize;
-        offsetRef.current = nextOffset;
+Huge SEO opportunity.
 
-        const transformValue = isVertical
-          ? `translate3d(0, ${-offsetRef.current}px, 0)`
-          : `translate3d(${-offsetRef.current}px, 0, 0)`;
-        track.style.transform = transformValue;
-      }
+Example:
 
-      rafRef.current = requestAnimationFrame(animate);
-    };
+```text
+/web-development-company-in-surat
 
-    rafRef.current = requestAnimationFrame(animate);
+/mobile-app-development-company-in-ahmedabad
 
-    return () => {
-      if (rafRef.current !== null) {
-        cancelAnimationFrame(rafRef.current);
-        rafRef.current = null;
-      }
-      lastTimestampRef.current = null;
-    };
-  }, [targetVelocity, seqWidth, seqHeight, isHovered, hoverSpeed, isVertical]);
-};
+/software-development-company-in-gujarat
 
-export const LogoLoop = React.memo<LogoLoopProps>(
-  ({
-    logos,
-    speed = 120,
-    direction = 'left',
-    width = '100%',
-    logoHeight = 28,
-    gap = 32,
-    pauseOnHover,
-    hoverSpeed,
-    fadeOut = false,
-    fadeOutColor,
-    scaleOnHover = false,
-    renderItem,
-    ariaLabel = 'Partner logos',
-    className,
-    style
-  }) => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const trackRef = useRef<HTMLDivElement>(null);
-    const seqRef = useRef<HTMLUListElement>(null);
+/flutter-app-development-company-in-india
 
-    const [seqWidth, setSeqWidth] = useState<number>(0);
-    const [seqHeight, setSeqHeight] = useState<number>(0);
-    const [copyCount, setCopyCount] = useState<number>(ANIMATION_CONFIG.MIN_COPIES);
-    const [isHovered, setIsHovered] = useState<boolean>(false);
+/website-development-company-in-india
+```
 
-    const effectiveHoverSpeed = useMemo(() => {
-      if (hoverSpeed !== undefined) return hoverSpeed;
-      if (pauseOnHover === true) return 0;
-      if (pauseOnHover === false) return undefined;
-      return 0;
-    }, [hoverSpeed, pauseOnHover]);
+Google loves these when done correctly.
 
-    const isVertical = direction === 'up' || direction === 'down';
+---
 
-    const targetVelocity = useMemo(() => {
-      const magnitude = Math.abs(speed);
-      let directionMultiplier: number;
-      if (isVertical) {
-        directionMultiplier = direction === 'up' ? 1 : -1;
-      } else {
-        directionMultiplier = direction === 'left' ? 1 : -1;
-      }
-      const speedMultiplier = speed < 0 ? -1 : 1;
-      return magnitude * directionMultiplier * speedMultiplier;
-    }, [speed, direction, isVertical]);
+## Industry Pages
 
-    const updateDimensions = useCallback(() => {
-      const containerWidth = containerRef.current?.clientWidth ?? 0;
-      const sequenceRect = seqRef.current?.getBoundingClientRect?.();
-      const sequenceWidth = sequenceRect?.width ?? 0;
-      const sequenceHeight = sequenceRect?.height ?? 0;
-      if (isVertical) {
-        const parentHeight = containerRef.current?.parentElement?.clientHeight ?? 0;
-        if (containerRef.current && parentHeight > 0) {
-          const targetHeight = Math.ceil(parentHeight);
-          if (containerRef.current.style.height !== `${targetHeight}px`)
-            containerRef.current.style.height = `${targetHeight}px`;
-        }
-        if (sequenceHeight > 0) {
-          setSeqHeight(Math.ceil(sequenceHeight));
-          const viewport = containerRef.current?.clientHeight ?? parentHeight ?? sequenceHeight;
-          const copiesNeeded = Math.ceil(viewport / sequenceHeight) + ANIMATION_CONFIG.COPY_HEADROOM;
-          setCopyCount(Math.max(ANIMATION_CONFIG.MIN_COPIES, copiesNeeded));
-        }
-      } else if (sequenceWidth > 0) {
-        setSeqWidth(Math.ceil(sequenceWidth));
-        const copiesNeeded = Math.ceil(containerWidth / sequenceWidth) + ANIMATION_CONFIG.COPY_HEADROOM;
-        setCopyCount(Math.max(ANIMATION_CONFIG.MIN_COPIES, copiesNeeded));
-      }
-    }, [isVertical]);
+```text
+/software-for-real-estate
 
-    useResizeObserver(updateDimensions, [containerRef, seqRef], [logos, gap, logoHeight, isVertical]);
+/software-for-healthcare
 
-    useImageLoader(seqRef, updateDimensions, [logos, gap, logoHeight, isVertical]);
+/software-for-education
 
-    useAnimationLoop(trackRef, targetVelocity, seqWidth, seqHeight, isHovered, effectiveHoverSpeed, isVertical);
+/software-for-finance
 
-    const cssVariables = useMemo(
-      () =>
-        ({
-          '--logoloop-gap': `${gap}px`,
-          '--logoloop-logoHeight': `${logoHeight}px`,
-          ...(fadeOutColor && { '--logoloop-fadeColor': fadeOutColor })
-        }) as React.CSSProperties,
-      [gap, logoHeight, fadeOutColor]
-    );
+/software-for-startups
+```
 
-    const rootClassName = useMemo(
-      () =>
-        [
-          'logoloop',
-          isVertical ? 'logoloop--vertical' : 'logoloop--horizontal',
-          fadeOut && 'logoloop--fade',
-          scaleOnHover && 'logoloop--scale-hover',
-          className
-        ]
-          .filter(Boolean)
-          .join(' '),
-      [isVertical, fadeOut, scaleOnHover, className]
-    );
+---
 
-    const handleMouseEnter = useCallback(() => {
-      if (effectiveHoverSpeed !== undefined) setIsHovered(true);
-    }, [effectiveHoverSpeed]);
-    const handleMouseLeave = useCallback(() => {
-      if (effectiveHoverSpeed !== undefined) setIsHovered(false);
-    }, [effectiveHoverSpeed]);
+## Case Studies
 
-    const renderLogoItem = useCallback(
-      (item: LogoItem, key: React.Key) => {
-        if (renderItem) {
-          return (
-            <li className="logoloop__item" key={key} role="listitem">
-              {renderItem(item, key)}
-            </li>
-          );
-        }
-        const isNodeItem = 'node' in item;
-        const content = isNodeItem ? (
-          <span className="logoloop__node" aria-hidden={!!item.href && !item.ariaLabel}>
-            {(item as any).node}
-          </span>
-        ) : (
-          <img
-            src={(item as any).src}
-            srcSet={(item as any).srcSet}
-            sizes={(item as any).sizes}
-            width={(item as any).width}
-            height={(item as any).height}
-            alt={(item as any).alt ?? ''}
-            title={(item as any).title}
-            loading="lazy"
-            decoding="async"
-            draggable={false}
-          />
-        );
-        const itemAriaLabel = isNodeItem
-          ? ((item as any).ariaLabel ?? (item as any).title)
-          : ((item as any).alt ?? (item as any).title);
-        const itemContent = (item as any).href ? (
-          <a
-            className="logoloop__link"
-            href={(item as any).href}
-            aria-label={itemAriaLabel || 'logo link'}
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            {content}
-          </a>
-        ) : (
-          content
-        );
-        return (
-          <li className="logoloop__item" key={key} role="listitem">
-            {itemContent}
-          </li>
-        );
-      },
-      [renderItem]
-    );
+Very important.
 
-    const logoLists = useMemo(
-      () =>
-        Array.from({ length: copyCount }, (_, copyIndex) => (
-          <ul
-            className="logoloop__list"
-            key={`copy-${copyIndex}`}
-            role="list"
-            aria-hidden={copyIndex > 0}
-            ref={copyIndex === 0 ? seqRef : undefined}
-          >
-            {logos.map((item, itemIndex) => renderLogoItem(item, `${copyIndex}-${itemIndex}`))}
-          </ul>
-        )),
-      [copyCount, logos, renderLogoItem]
-    );
+Example:
 
-    const containerStyle = useMemo(
-      (): React.CSSProperties => ({
-        width: isVertical
-          ? toCssLength(width) === '100%'
-            ? undefined
-            : toCssLength(width)
-          : (toCssLength(width) ?? '100%'),
-        ...cssVariables,
-        ...style
-      }),
-      [width, cssVariables, style, isVertical]
-    );
+```text
+/case-studies/nivassetu
 
-    return (
-      <div ref={containerRef} className={rootClassName} style={containerStyle} role="region" aria-label={ariaLabel}>
-        <div className="logoloop__track" ref={trackRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-          {logoLists}
-        </div>
-      </div>
-    );
-  }
-);
+/case-studies/catalstudio
 
-LogoLoop.displayName = 'LogoLoop';
+/case-studies/ecommerce-platform
 
-export default LogoLoop;
+/case-studies/flutter-app
+```
 
+Structure:
 
+```text
+Problem
 
+Solution
 
-==> comamnd for logo : npx shadcn@latest add @react-bits/LogoLoop-TS-CSS
+Technology Stack
+
+Timeline
+
+Results
+
+Screenshots
+```
+
+---
+
+## Blog Strategy
+
+Create categories:
+
+```text
+Web Development
+
+Mobile Apps
+
+Flutter
+
+SEO
+
+AI
+
+Business
+
+Cloud
+
+Case Studies
+```
+
+Target:
+
+```text
+100+ blogs
+```
+
+over time.
+
+---
+
+# SEO Technical Setup
+
+You need:
+
+```text
+sitemap.xml
+
+robots.txt
+
+schema markup
+
+open graph
+
+twitter cards
+
+canonical tags
+
+breadcrumbs
+
+structured data
+```
+
+on every page.
+
+---
+
+# Homepage SEO
+
+Example keyword:
+
+```text
+Software Development Company
+
+Web Development Agency
+
+Flutter Development Company
+```
+
+Need:
+
+```text
+H1
+
+H2
+
+FAQ
+
+Testimonials
+
+Projects
+
+CTA
+
+Service Overview
+```
+
+---
+
+# Google EEAT
+
+Google wants:
+
+```text
+Experience
+
+Expertise
+
+Authority
+
+Trust
+```
+
+Add:
+
+```text
+Founder Profile
+
+Team Page
+
+Client Testimonials
+
+Case Studies
+
+Contact Information
+
+Business Address
+```
+
+---
+
+# Internal Linking
+
+Every page should link to:
+
+```text
+Services
+
+Blogs
+
+Case Studies
+
+Contact
+```
+
+Never leave pages isolated.
+
+---
+
+# Professional Navbar
+
+I would reduce it to:
+
+```text
+Services
+
+Solutions
+
+Portfolio
+
+Case Studies
+
+Blog
+
+About
+
+Contact
+```
+
+Everything else in dropdowns.
+
+---
+
+# Images SEO
+
+Every image:
+
+```html
+alt="Flutter App Development Project"
+```
+
+not:
+
+```html
+alt="image123"
+```
+
+Generate:
+
+```text
+WebP
+
+Compressed
+
+Lazy Loaded
+```
+
+---
+
+# Master SEO Prompt
+
+Use this with Cursor/Claude/Gemini:
+
+Act as a Senior Technical SEO Consultant, Google Search Quality Expert, Content Strategist, and SaaS Growth Architect.
+
+Website:
+infovision.digital
+
+Business Type:
+Software Development Agency / Digital Solutions Company
+
+Goal:
+Generate a complete SEO architecture capable of ranking for service keywords, location keywords, industry keywords, and informational blog content.
+
+Create:
+
+1. Full sitemap structure
+2. Service page architecture
+3. Location page architecture
+4. Industry page architecture
+5. Case study architecture
+6. Blog content strategy (100+ topics)
+7. Internal linking structure
+8. Schema markup recommendations
+9. Open Graph strategy
+10. Technical SEO checklist
+11. Core Web Vitals optimization
+12. EEAT improvements
+13. Lead generation funnel
+14. Conversion optimization recommendations
+15. Footer architecture
+16. URL structure
+17. Navigation structure
+
+Prioritize:
+
+* Google SEO
+* AI Search (GEO)
+* ChatGPT visibility
+* Perplexity visibility
+* Bing visibility
+* High-intent client acquisition
+
+Output a complete enterprise-level SEO blueprint.
+
+### If this were my agency site
+
+I'd focus on these first:
+
+1. Service Pages
+2. Case Studies
+3. Blog System
+4. FAQ Schema
+5. Sitemap
+6. Location Pages
+7. Internal Linking
+8. Google Business Profile
+9. Testimonials
+10. Portfolio
+
+Those 10 will generate far more leads than spending weeks tweaking meta descriptions while having only 5 pages on the site. Google can't rank pages that don't exist. That's the inconvenient part of SEO nobody puts on a conference slide.

@@ -31,6 +31,7 @@ const ParticleSectionComponent: React.FC = () => {
             color="#8c50ff"
             particleSize={1.8}
             autoAnimate={true}
+            isHovered={isHovered}
           />
         </div>
 

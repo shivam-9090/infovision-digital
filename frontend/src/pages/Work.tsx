@@ -1,6 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Card, CardBody } from "../components/Card";
+import { ProductVisual } from "../components/ProductVisual";
+import { WorkHeroVisual } from "../components/WorkHeroVisual";
 import {
   FaBrain,
   FaPalette,
@@ -9,197 +11,185 @@ import {
   FaMobileAlt,
   FaCube,
   FaChartLine,
-  FaExternalLinkAlt,
   FaArrowRight,
 } from "react-icons/fa";
 import "./Work.css";
 
-const projects = [
+interface Project {
+  id: string;
+  caseStudyId: string;
+  title: string;
+  positioning: string;
+  description: string;
+  tags: string[];
+  icon: React.ReactNode;
+  liveUrl: string;
+}
+
+const projects: Project[] = [
   {
     id: "crm-infovision",
     caseStudyId: "crm-infovision",
     title: "CRM InfoVision",
+    positioning: "Enterprise-grade Sales Pipeline & Real-Time Workspace Lifecycle Analytics",
     description:
-      "Complete Customer Relationship Management system built with Next.js frontend and NestJS backend. Features authentication, workspace management, deals pipeline, and real-time analytics.",
-    tags: ["Next.js", "NestJS", "TypeScript", "Docker"],
-    icon: <FaChartLine size={24} />,
+      "Full-stack client management pipeline built using Next.js 14 and NestJS. Features standardized workspace permissions, multi-tenancy, and automatic Terraform deployment configuration.",
+    tags: ["Next.js", "NestJS", "PostgreSQL", "Docker", "Terraform"],
+    icon: <FaChartLine size={16} />,
     liveUrl: "https://crm.infovision.digital/",
-    metrics: [
-      { label: "Stack", value: "Full Stack" },
-      { label: "TypeScript", value: "95%" },
-    ],
   },
   {
     id: "infovision-gpt",
     caseStudyId: "infovision-gpt",
     title: "InfoVision GPT 4.5B",
+    positioning: "Large Language Model Tuned for Robust Natural Language Processing",
     description:
-      "Large language model with 4.5 billion parameters trained for advanced natural language understanding and generation. Published on Hugging Face with full model weights and documentation.",
-    tags: ["AI", "LLM", "Transformers", "PyTorch"],
-    icon: <FaBrain size={24} />,
+      "A 4.5 billion parameter transformer model pre-trained and published on Hugging Face. Engineered with stable optimization schedules and repeatable checkpoints for structured NLP workflows.",
+    tags: ["PyTorch", "Transformers", "LLM", "Python"],
+    icon: <FaBrain size={16} />,
     liveUrl: "https://huggingface.co/shivam909067/Infovision-gpt-4.5B",
-    metrics: [
-      { label: "Parameters", value: "4.5B" },
-      { label: "Type", value: "LLM" },
-    ],
   },
   {
     id: "image-gen-art",
     caseStudyId: "image-gen-art",
     title: "Image Gen Art 01",
+    positioning: "Custom Diffusion Visual Generation Model for High-Quality Coherent Art",
     description:
-      "Advanced AI image generation model specialized in creating artistic and creative visuals. Fine-tuned diffusion model for high-quality image synthesis with diverse artistic styles.",
-    tags: ["AI", "Image Generation", "Diffusion", "Computer Vision"],
-    icon: <FaPalette size={24} />,
+      "Generative visual network specialized in producing consistent, artistic styles across dynamic prompts. Published with baseline metrics to support reproducible generation experiments.",
+    tags: ["Diffusion", "PyTorch", "Computer Vision", "Hugging Face"],
+    icon: <FaPalette size={16} />,
     liveUrl: "https://huggingface.co/shivam909067/Image-gen-art-01",
-    metrics: [
-      { label: "Type", value: "Gen AI" },
-      { label: "Domain", value: "Art" },
-    ],
   },
   {
     id: "sifera-v1",
     caseStudyId: "sifera-v1",
     title: "Sifera V1",
+    positioning: "Foundational Open-Source NLP Baseline for Specialized Downstream Tasks",
     description:
-      "First generation foundational AI model focused on specialized language tasks. Open-source contribution to the Hugging Face community with comprehensive model card.",
-    tags: ["AI", "Deep Learning", "Open Source", "NLP"],
-    icon: <FaBolt size={24} />,
+      "First generation foundational AI model initiative published in an open ecosystem. Created structured checkpoints and evaluation pipelines to serve as a low-latency model baseline.",
+    tags: ["Deep Learning", "Transformers", "NLP", "Python"],
+    icon: <FaBolt size={16} />,
     liveUrl: "https://huggingface.co/shivam909067/Sifera-V1",
-    metrics: [
-      { label: "Version", value: "V1" },
-      { label: "Status", value: "Open" },
-    ],
   },
   {
-    id: "exora",
-    caseStudyId: "exora",
-    title: "Exora",
+    id: "catalstudio",
+    caseStudyId: "catalstudio",
+    title: "CatalStudio",
+    positioning: "AI-Powered E-Commerce Catalog Variation & Generative Image Studio",
     description:
-      "Modern e-commerce platform for handmade flowers and botanical products. Features product catalog, shopping cart, responsive design, and seamless checkout experience.",
-    tags: ["E-commerce", "React", "Netlify", "Web"],
-    icon: <FaShoppingCart size={24} />,
-    liveUrl: "https://exorav.netlify.app",
-    metrics: [
-      { label: "Type", value: "E-commerce" },
-      { label: "Status", value: "Live" },
-    ],
+      "An advanced creative studio for generating hyper-realistic catalog variation assets. Features dynamic multi-angle catalog synthesis, background swapping, and automated image generation.",
+    tags: ["React", "TypeScript", "AI Integration", "Cloudflare Pages"],
+    icon: <FaPalette size={16} />,
+    liveUrl: "https://catalstudio.com/",
   },
   {
-    id: "appexorbit",
-    caseStudyId: "appexorbit",
-    title: "Appexorbit",
+    id: "nivassetu",
+    caseStudyId: "nivassetu",
+    title: "NivasSetu",
+    positioning: "Zero-Brokerage Residential Rental Platform & Direct Listings Engine",
     description:
-      "Cross-platform mobile application built with Expo React Native and TypeScript. Features Firebase authentication, real-time database, cloud storage, and Material Design 3 UI.",
-    tags: ["React Native", "Expo", "TypeScript", "Firebase"],
-    icon: <FaMobileAlt size={24} />,
-    liveUrl: "#apk",
-    metrics: [
-      { label: "TypeScript", value: "97.3%" },
-      { label: "Platforms", value: "Multi" },
-    ],
+      "Zero-brokerage rental portal in Gujarat connecting tenants and owners. Optimized with secure Aadhaar KYC verification, Google Maps spatial geocoding, and custom real-time search.",
+    tags: ["React", "NestJS", "PostgreSQL", "Google Maps API", "Aadhaar KYC"],
+    icon: <FaMobileAlt size={16} />,
+    liveUrl: "https://nivassetu.com/",
+  },
+  {
+    id: "trilunafashion",
+    caseStudyId: "trilunafashion",
+    title: "Triluna Fashion",
+    positioning: "Premium E-Commerce Storefront & High-Performance Catalog for Ethnic Wear",
+    description:
+      "A fast, high-conversion e-commerce platform specializing in premium sarees and ethnic wear. Features a high-fidelity catalog grid, custom filtering systems, and responsive checkout experiences.",
+    tags: ["React", "Shopify API", "CSS Modules", "TailwindCSS", "Core Web Vitals"],
+    icon: <FaShoppingCart size={16} />,
+    liveUrl: "https://trilunafashion.com/",
   },
   {
     id: "mclaren-infovision",
     caseStudyId: "mclaren-infovision",
     title: "McLaren InfoVision",
+    positioning: "Cinematic 3D Grand Tourer Interactive Experience with Smooth Camera Paths",
     description:
-      "Interactive 3D McLaren GT experience with Three.js and GSAP. Features cinematic camera animations, 7 interactive positions, touch gestures, color customization, and adaptive quality controls.",
-    tags: ["Three.js", "GSAP", "3D", "WebGL"],
-    icon: <FaCube size={24} />,
+      "WebGL vehicle simulator rendering a detailed McLaren GT. Guided by 7 custom camera path transitions, responsive touch controls, and color customization shaders via Three.js and GSAP.",
+    tags: ["Three.js", "GSAP", "WebGL", "3D Web"],
+    icon: <FaCube size={16} />,
     liveUrl: "https://mclaren-vision.netlify.app/",
-    metrics: [
-      { label: "Positions", value: "7" },
-      { label: "Type", value: "3D Web" },
-    ],
   },
 ];
 
 export const Work: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <main className="work-page">
       <section className="work-header section">
+        <div className="work-header__canvas-container">
+          <WorkHeroVisual />
+        </div>
         <div className="container">
-          <h1>Project Portfolio</h1>
+          <h1 className="work-title">Project <span className="text-gradient">Portfolio</span></h1>
           <p className="work-header__subtitle">
-            A collection of production applications showcasing full-stack
-            development expertise
+            A premium showcase of production applications and foundational AI engineering
           </p>
           <p className="work-header__contact-text">
-            Need similar results? Review our{" "}
-            <Link to="/services">services</Link> and{" "}
-            <Link to="/contact">start a project discussion</Link>.
+            Looking for business outcomes? Review our{" "}
+            <Link to="/services">services</Link> or{" "}
+            <Link to="/contact">initiate a project discussion</Link>.
           </p>
           <p className="work-header__desc-text">
-            Explore detailed case studies for architecture decisions,
-            implementation approach, and measurable delivery outcomes across
-            web, mobile, AI, and 3D projects.
+            Explore dedicated case study architecture decisions, developmental journeys,
+            and actual client metrics across web, mobile, artificial intelligence, and 3D graphics.
           </p>
         </div>
       </section>
 
       <section className="work-grid-section section">
         <div className="container">
-          <div className="work-projects grid grid--2">
+          <div className="work-projects">
             {projects.map((project) => (
               <div
                 key={project.id}
                 className="project-card-wrapper"
                 role="button"
                 tabIndex={0}
-                style={{ cursor: "pointer" }}
                 onClick={(e) => {
-                  // Prevent navigation if clicking on a button or link inside the card
-                  if (
-                    (e.target as HTMLElement).closest("a") ||
-                    (e.target as HTMLElement).closest("button")
-                  ) {
+                  const target = e.target as HTMLElement;
+                  // If clicking on an action button, let the default handle it
+                  if (target.closest(".action-btn")) {
                     return;
                   }
-                  if (project.liveUrl !== "#apk") {
-                    window.open(
-                      project.liveUrl,
-                      "_blank",
-                      "noopener,noreferrer",
-                    );
-                  }
+                  // Otherwise, navigate to the dedicated Case Study page
+                  navigate(`/case-study/${project.caseStudyId}`);
                 }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
-                    if (project.liveUrl !== "#apk") {
-                      window.open(
-                        project.liveUrl,
-                        "_blank",
-                        "noopener,noreferrer",
-                      );
-                    }
+                    navigate(`/case-study/${project.caseStudyId}`);
                   }
                 }}
               >
                 <Card variant="bordered" className="project-card">
+                  {/* Top Section: Interactive Visual */}
+                  <div className="project-card__visual-wrapper">
+                    <ProductVisual id={project.id} />
+                  </div>
+
                   <CardBody className="project-card__body">
+                    {/* Middle Section: Project Title + Positioning */}
                     <div className="project-card__header">
-                      <div className="project-card__icon-wrapper">
-                        {project.icon}
-                      </div>
                       <div className="project-card__title-row">
+                        <div className="project-card__icon-wrapper">
+                          {project.icon}
+                        </div>
                         <h3 className="project-card__title">{project.title}</h3>
                       </div>
+                      <p className="project-card__positioning">{project.positioning}</p>
                     </div>
 
                     <p className="project-card__description">
                       {project.description}
                     </p>
 
-                    <div className="project-card__metrics">
-                      {project.metrics.map((metric, index) => (
-                        <div key={index} className="metric-item">
-                          <span className="metric-label">{metric.label}</span>
-                          <span className="metric-value">{metric.value}</span>
-                        </div>
-                      ))}
-                    </div>
-
+                    {/* Tags Section */}
                     <div className="project-card__tags">
                       {project.tags.map((tag) => (
                         <span key={tag} className="project-tag">
@@ -208,25 +198,24 @@ export const Work: React.FC = () => {
                       ))}
                     </div>
 
+                    {/* Actions Section */}
                     <div className="project-card__actions">
-                      {project.caseStudyId && (
-                        <Link
-                          to={`/case-study/${project.caseStudyId}`}
-                          className="action-btn action-btn--primary"
-                        >
-                          Case Study <FaArrowRight />
-                        </Link>
-                      )}
+                      <Link
+                        to={`/case-study/${project.caseStudyId}`}
+                        className="action-btn action-btn--primary"
+                      >
+                        Read Case Study <FaArrowRight className="btn-arrow" />
+                      </Link>
 
-                      {project.liveUrl === "#apk" ? (
-                        <a
-                          href="/app-release.apk"
-                          download="appexorbit.apk"
-                          className="action-btn action-btn--outline"
-                        >
-                          Download APK
-                        </a>
-                      ) : null}
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="action-btn action-btn--outline"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Live Link
+                      </a>
                     </div>
                   </CardBody>
                 </Card>

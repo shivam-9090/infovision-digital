@@ -30,3 +30,9 @@ frontend/dist-ssr/
 
 # Misc
 *.local
+
+tts/
+
+prompt.txt
+
+seo.txt

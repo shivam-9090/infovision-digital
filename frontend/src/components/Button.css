@@ -9,7 +9,7 @@
   border: 1px solid transparent;
   cursor: pointer;
   transition: all var(--transition-fast);
-  border-radius: var(--border-radius-full);
+  border-radius: 8px;
   white-space: nowrap;
   position: relative;
   overflow: hidden;
@@ -28,7 +28,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.15),
     transparent
   );
   transform: skewX(-20deg);
@@ -55,70 +55,70 @@
 .btn--sm {
   padding: 0.5rem 1rem;
   font-size: var(--font-size-xs);
+  border-radius: 6px;
 }
 
 .btn--md {
   padding: 0.75rem 1.5rem;
   font-size: var(--font-size-sm);
+  border-radius: 8px;
 }
 
 .btn--lg {
   padding: 1rem 2rem;
   font-size: var(--font-size-base);
+  border-radius: 8px;
 }
 
-/* Primary */
+/* Primary - Solid Vercel-style White with Black Text */
 .btn--primary {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--color-text-primary);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: none;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .btn--primary:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.5);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  background: #ececec;
+  border-color: #ececec;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 }
 
 .btn--primary:active:not(:disabled) {
-  background: rgba(255, 255, 255, 0.05);
+  background: #e4e4e7;
   transform: translateY(0);
 }
 
-/* Secondary */
+/* Secondary - Translucent dark card style */
 .btn--secondary {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   color: var(--color-text-primary);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .btn--secondary:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
 }
 
-/* Outline */
+/* Outline - Subtle border glow */
 .btn--outline {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.02);
   color: var(--color-text-primary);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .btn--outline:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.4);
-  color: var(--color-text-primary);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Ghost */

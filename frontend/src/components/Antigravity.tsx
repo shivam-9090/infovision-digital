@@ -1,5 +1,5 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import React, { useMemo, useRef } from "react";
+import React, { useMemo, useRef, useState, useEffect } from "react";
 import * as THREE from "three";
 
 interface AntigravityProps {
@@ -18,6 +18,7 @@ interface AntigravityProps {
   pulseSpeed?: number;
   particleShape?: "capsule" | "sphere" | "box" | "tetrahedron";
   fieldStrength?: number;
+  isHovered?: boolean;
 }
 
 const AntigravityInner: React.FC<AntigravityProps> = ({
@@ -44,6 +45,8 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
   const lastMousePos = useRef({ x: 0, y: 0 });
   const lastMouseMoveTime = useRef(0);
   const virtualMouse = useRef({ x: 0, y: 0 });
+  const accum = useRef(0);
+  const fpsInterval = 1 / 60; // Target 60 FPS update
 
   const particles = useMemo(() => {
     const temp = [];
@@ -86,9 +89,15 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
     return temp;
   }, [count, viewport.width, viewport.height]);
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
     const mesh = meshRef.current;
     if (!mesh) return;
+
+    accum.current += delta;
+    if (accum.current < fpsInterval) return;
+
+    const frameDelta = accum.current;
+    accum.current = accum.current % fpsInterval;
 
     const { viewport: v, pointer: m } = state;
 
@@ -123,7 +132,8 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
     particles.forEach((particle, i) => {
       let { t, speed, mx, my, mz, cz, randomRadiusOffset } = particle;
 
-      t = particle.t += speed / 2;
+      // Scale update speed by delta time
+      t = particle.t += (speed / 2) * (frameDelta * 60);
 
       const projectionFactor = 1 - cz / 50;
       const projectedTargetX = targetX * projectionFactor;
@@ -195,14 +205,72 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
   );
 };
 
+const SceneCleanup = () => {
+  const { scene } = useThree();
+  useEffect(() => {
+    return () => {
+      scene.traverse((object) => {
+        if (object instanceof THREE.InstancedMesh || object.isMesh) {
+          if (object.geometry) {
+            object.geometry.dispose();
+          }
+          if (object.material) {
+            if (Array.isArray(object.material)) {
+              object.material.forEach((mat) => mat.dispose());
+            } else {
+              object.material.dispose();
+            }
+          }
+        }
+      });
+    };
+  }, [scene]);
+  return null;
+};
+
 const Antigravity: React.FC<AntigravityProps> = (props) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isInViewport, setIsInViewport] = useState(false);
+  const [isTabActive, setIsTabActive] = useState(true);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInViewport(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    const handleVisibility = () => {
+      setIsTabActive(!document.hidden);
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibility);
+    };
+  }, []);
+
+  const { isHovered = false } = props;
+  const isRendering = isHovered && isInViewport && isTabActive;
+
   return (
-    <Canvas
-      camera={{ position: [0, 0, 50], fov: 35 }}
-      style={{ width: "100%", height: "100%" }}
-    >
-      <AntigravityInner {...props} />
-    </Canvas>
+    <div ref={containerRef} style={{ width: "100%", height: "100%" }}>
+      <Canvas
+        camera={{ position: [0, 0, 50], fov: 35 }}
+        style={{ width: "100%", height: "100%" }}
+        frameloop={isRendering ? "always" : "never"}
+        gl={{ antialias: false, alpha: true }}
+      >
+        <SceneCleanup />
+        <AntigravityInner {...props} />
+      </Canvas>
+    </div>
   );
 };
 

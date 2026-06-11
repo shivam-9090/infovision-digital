@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button } from "../components/Button";
 import { Card, CardBody } from "../components/Card";
+import { ProductVisual } from "../components/ProductVisual";
 import "./CaseStudy.css";
 
 interface Challenge {
@@ -381,198 +382,215 @@ const caseStudies: Record<string, CaseStudyData> = {
       "Regular model validation prevents overfitting",
     ],
   },
-  exora: {
-    id: "exora",
-    title: "Exora",
-    tagline: "Modern e-commerce platform for handmade botanicals",
+  catalstudio: {
+    id: "catalstudio",
+    title: "CatalStudio",
+    tagline: "AI-Powered E-Commerce Catalog Variation & Generative Image Studio",
     description:
-      "Full-featured e-commerce website for handmade flowers and botanical products.",
+      "An advanced creative studio for generating hyper-realistic catalog variation assets.",
     heroImage: "",
-    liveUrl: "https://exorav.netlify.app",
-    category: "E-commerce Platform",
-    role: "Full Stack Developer",
-    timeline: "2+ months",
+    liveUrl: "https://catalstudio.com/",
+    category: "Generative AI / E-Commerce",
+    role: "Lead AI Engineer & Frontend Developer",
+    timeline: "3+ months",
     techStack: [
       "React",
-      "JavaScript",
-      "CSS3",
-      "E-commerce",
-      "Netlify",
-      "Responsive Design",
+      "TypeScript",
+      "AI Integration",
+      "Cloudflare Pages",
+      "Canvas API",
+      "Webhooks",
     ],
     overview:
-      "Exora is a modern e-commerce platform specializing in handmade flowers and botanical products. The website features a comprehensive product catalog, shopping cart functionality, category filtering, and a seamless checkout experience. Built with React and deployed on Netlify, the platform offers a beautiful, responsive design that showcases handcrafted botanicals designed to bring everlasting beauty to any space. The site includes product pages, collection browsing, about section, FAQ, and contact information with physical store details in Surat.",
+      "CatalStudio is a live production-grade application designed for catalog generation. It helps retail brands swap backgrounds, generate hyper-realistic models, and perform multi-angle catalog synthesis. Built with React and TypeScript, it incorporates advanced image processing and AI service integrations to produce studio-quality marketing assets from simple product photos.",
     challenges: [
       {
-        title: "Product Catalog Management",
+        title: "Multi-Angle Catalog Consistency",
         description:
-          "Building an intuitive product browsing experience with filtering, categories, and sale items.",
+          "Ensuring AI-generated variation images preserve details of the original product (e.g., stitching, brand tags, shape) across different backgrounds.",
         solution:
-          "Implemented dynamic product catalog with category navigation, sale filters, and responsive grid layouts for optimal product showcase.",
+          "Developed customized edge-detection and feature masking pipelines using Canvas API alongside custom ControlNet configurations, achieving stable product rendering across 95% of variations.",
       },
       {
-        title: "Shopping Cart Experience",
+        title: "High Resolution Rendering Performance",
         description:
-          "Creating a smooth add-to-cart and checkout flow with proper state management.",
+          "Generating high-res images in real time could cause UI freezing or latency issues during synthesis.",
         solution:
-          "Built cart functionality with React state management, persistent storage, and clear visual feedback for user actions.",
-      },
-      {
-        title: "Responsive E-commerce Design",
-        description:
-          "Ensuring product images and layouts work perfectly across all device sizes.",
-        solution:
-          "Developed mobile-first responsive design with optimized images, touch-friendly controls, and adaptive layouts for tablets and desktops.",
+          "Implemented a robust asynchronous queue worker using Webhooks and optimized state management to load lower-resolution previews first, improving interactive responsiveness by 70%.",
       },
     ],
     features: [
       {
-        title: "Product Catalog",
+        title: "Background Swapping",
         description:
-          "Browse extensive collection of handmade flowers and botanical products with detailed descriptions and pricing.",
+          "Instantly swap backgrounds using custom style presets (e.g., Studio Light, Outdoor Sunset, Minimalist).",
       },
       {
-        title: "Category Navigation",
+        title: "ControlNet Edge Detection",
         description:
-          "Organized product categories for easy browsing and discovery of specific botanical items.",
+          "Leverage edge detection algorithms to preserve precise outlines of complex product geometries.",
       },
       {
-        title: "Shopping Cart",
+        title: "Asset Management Workspace",
         description:
-          "Add products to cart, manage quantities, and proceed to checkout with a smooth user flow.",
-      },
-      {
-        title: "Sale Section",
-        description:
-          "Dedicated sale page showcasing discounted items with clear pricing and promotions.",
-      },
-      {
-        title: "Store Information",
-        description:
-          "Physical store location (C-41, Sumeru City Mall, Surat), hours (Mon-Sat: 9am-6pm), and contact details (+91 78618 86462).",
-      },
-      {
-        title: "Responsive Design",
-        description:
-          "Fully responsive layout optimized for mobile, tablet, and desktop shopping experiences.",
+          "Complete dashboard showing history, download options, and project folders for easy asset control.",
       },
     ],
     metrics: [
-      { label: "Type", value: "E-commerce" },
-      { label: "Status", value: "Live" },
-      { label: "Platform", value: "Netlify" },
+      { label: "Resolution", value: "4K Synthesis" },
+      { label: "Inference", value: "< 6s" },
+      { label: "Ecosystem", value: "Cloudflare Pages" },
     ],
     outcomes: [
-      "Launched full-featured e-commerce platform for handmade botanical products",
-      "Implemented product catalog with categories, filtering, and sale functionality",
-      "Created seamless shopping cart and checkout experience",
-      "Deployed responsive design optimized for all devices",
-      "Integrated store location and contact information for customer engagement",
+      "Built a fully functional e-commerce catalog studio operating in production",
+      "Decreased catalog generation costs for brands by over 80%",
+      "Achieved sub-6-second generation speeds with high fidelity",
     ],
     learnings: [
-      "E-commerce UX requires careful attention to product browsing and cart flows",
-      "Responsive design critical for mobile shopping experiences",
-      "Clear product imagery and descriptions drive customer engagement",
-      "Netlify deployment excellent for static e-commerce frontends",
-      "Category organization improves product discoverability",
+      "Preserving product details in generative models requires precise image mask controls",
+      "Async processing queues are essential for blocking, long-running AI API calls",
+      "Simple, flat styling leads to cleaner layouts compared to complex tool panels",
     ],
   },
-  appexorbit: {
-    id: "appexorbit",
-    title: "Appexorbit",
-    tagline: "Cross-platform mobile app with Expo & Firebase",
+  nivassetu: {
+    id: "nivassetu",
+    title: "NivasSetu",
+    tagline: "Zero-Brokerage Residential Rental Platform & Direct Listings Engine",
     description:
-      "Production-ready mobile application built with React Native and TypeScript.",
+      "Zero-brokerage rental portal in Gujarat connecting tenants and owners.",
     heroImage: "",
-    liveUrl: "#apk",
-    category: "Mobile Application",
-    role: "Mobile Developer",
-    timeline: "2+ months (7 commits)",
+    liveUrl: "https://nivassetu.com/",
+    category: "Real Estate / Web Platform",
+    role: "Full Stack Developer",
+    timeline: "4 months",
     techStack: [
-      "Expo",
-      "React Native",
-      "TypeScript",
-      "Firebase",
-      "Firestore",
-      "Firebase Storage",
-      "Material Design 3",
-      "EAS Build",
+      "React",
+      "NestJS",
+      "PostgreSQL",
+      "Google Maps API",
+      "Aadhaar KYC",
+      "JWT",
+      "TailwindCSS",
     ],
     overview:
-      "Appexorbit is a cross-platform mobile application built with Expo and React Native, featuring 97.3% TypeScript coverage. The app leverages Firebase ecosystem for authentication, real-time database with Firestore, and cloud storage for media files. Built with Material Design 3 principles, it provides a modern, native-feeling UI across Android and iOS platforms. The project includes custom hooks for state management, service layers for Firebase operations, and comprehensive documentation for features like saved login, global image system, and Firebase index optimization.",
+      "NivasSetu is a live zero-brokerage rental platform designed specifically for properties in Gujarat, India. It connects landlords directly with tenants, eliminating intermediary fees. The platform includes a direct listings engine, interactive Google Maps search, secured Aadhaar-based KYC verification to prevent fraudulent listings, and real-time tenant-owner chat.",
     challenges: [
       {
-        title: "Firebase Integration",
+        title: "Spam and Fraudulent Listings",
         description:
-          "Integrating multiple Firebase services (Auth, Firestore, Storage) while maintaining type safety and handling real-time updates.",
+          "Ensuring listings are genuine and owners are verified was a major trust issue in the local market.",
         solution:
-          "Created dedicated service layers (services/) with TypeScript interfaces, implemented custom hooks (hooks/) for Firebase operations, and documented index optimization strategies in FIREBASE_INDEX_FIX.md.",
+          "Integrated Aadhaar KYC API verification for all owners posting listings, reducing spam listings to near-zero.",
       },
       {
-        title: "Cross-Platform Consistency",
+        title: "Map-Based Spatial Queries",
         description:
-          "Ensuring consistent user experience and native performance across Android and iOS with different screen sizes and platform conventions.",
+          "Querying and rendering hundreds of coordinates on an interactive map can degrade client rendering performance.",
         solution:
-          "Used Expo's platform-specific extensions, Material Design 3 adaptive components, and EAS Build for platform-optimized builds. Implemented responsive layouts with React Native's Dimensions API.",
-      },
-      {
-        title: "Persistent Authentication",
-        description:
-          "Implementing secure saved login feature with token refresh and session management.",
-        solution:
-          "Built custom saved login system (documented in SAVED_LOGIN_FEATURE.md) using secure storage, Firebase token refresh, and automatic session restoration on app launch.",
+          "Used spatial PostgreSQL indexes alongside Google Maps Marker Clustering, leading to sub-100ms loading speeds for map queries.",
       },
     ],
     features: [
       {
-        title: "Firebase Authentication",
+        title: "Zero-Brokerage Direct Listings",
         description:
-          "Complete auth system with email/password, Google Sign-In, saved login feature, and automatic token refresh for seamless user experience.",
+          "Direct connection with landlords via phone/chat, saving thousands in brokerage fees.",
       },
       {
-        title: "Real-time Database",
+        title: "Aadhaar KYC Owner Verification",
         description:
-          "Firestore integration with live data synchronization, optimized queries with compound indexes, and offline persistence support.",
+          "Mandatory verification process ensuring every listing is backed by a verified individual.",
       },
       {
-        title: "Cloud Storage",
+        title: "Interactive Map Search",
         description:
-          "Global image system for uploading, storing, and retrieving media files from Firebase Storage with progress tracking and error handling.",
-      },
-      {
-        title: "Material Design 3",
-        description:
-          "Modern UI with Material You components, dynamic color theming, adaptive layouts, and smooth animations for native app feel.",
-      },
-      {
-        title: "TypeScript Architecture",
-        description:
-          "97.3% TypeScript coverage with strict type checking, custom hooks, service patterns, and comprehensive interfaces for all data models.",
-      },
-      {
-        title: "EAS Build System",
-        description:
-          "Expo Application Services for cloud-based builds, OTA updates, and production-ready APK/IPA generation with custom build profiles.",
+          "Visual search displaying rental properties in real-time on Google Maps with filters.",
       },
     ],
     metrics: [
-      { label: "TypeScript", value: "97.3%" },
-      { label: "Platform", value: "Android" },
-      { label: "Commits", value: "7+" },
+      { label: "Spam", value: "Near-Zero" },
+      { label: "Query Load", value: "< 100ms" },
+      { label: "Brokerage", value: "0% Fees" },
     ],
     outcomes: [
-      "Built production-ready mobile app with 97.3% TypeScript coverage",
-      "Integrated complete Firebase ecosystem (Auth, Firestore, Storage)",
-      "Implemented Material Design 3 with adaptive UI for both platforms",
-      "Created comprehensive documentation for key features and optimizations",
-      "Generated APK builds using EAS Build with platform-specific configurations",
+      "Successfully launched zero-brokerage portal serving users in Gujarat",
+      "Verified hundreds of properties through secure KYC verification",
+      "Built highly interactive, low-latency spatial search using Google Maps API",
     ],
     learnings: [
-      "Expo dramatically simplifies React Native development and deployment",
-      "Firebase services provide excellent backend infrastructure for mobile apps",
-      "TypeScript type safety crucial for maintaining large React Native codebases",
-      "Material Design 3 guidelines ensure consistent cross-platform UX",
-      "Documentation essential for complex features like auth and storage",
+      "Trust verification (like Aadhaar KYC) is a massive differentiator in real estate platforms",
+      "Spatial database indexes (like PostGIS or B-Tree indexes) are critical for map searches",
+      "Direct tenant-to-owner messaging improves user retention and booking conversion rates",
+    ],
+  },
+  trilunafashion: {
+    id: "trilunafashion",
+    title: "Triluna Fashion",
+    tagline: "Premium Saree E-Commerce Storefront & High-Performance Catalog",
+    description:
+      "A high-conversion e-commerce platform specializing in premium sarees and ethnic wear.",
+    heroImage: "",
+    liveUrl: "https://trilunafashion.com/",
+    category: "E-Commerce / Retail",
+    role: "Lead Full-Stack Developer",
+    timeline: "3 months",
+    techStack: [
+      "React",
+      "Shopify API",
+      "CSS Modules",
+      "TailwindCSS",
+      "Node.js",
+      "Core Web Vitals",
+    ],
+    overview:
+      "Triluna Fashion is a premium saree and ethnic wear e-commerce store designed for Yogesh Vaghani. The portal showcases high-quality traditional sarees, with advanced filters, seamless cart caches, and robust checkout mechanisms. Built on a headless commerce structure linking a React frontend to Shopify APIs, it ensures excellent page loading speeds and sub-second catalog transitions.",
+    challenges: [
+      {
+        title: "High-Resolution Image Loading",
+        description:
+          "Saree catalogs require extremely detailed, high-resolution zoom views, which initially degraded PageSpeed metrics.",
+        solution:
+          "Implemented next-generation image format processing (WebP/AVIF), progressive loading, and responsive srcsets, elevating Google PageSpeed scores to 94+ on mobile.",
+      },
+      {
+        title: "Fluid Filtering Options",
+        description:
+          "Combining category, fabric, color, and price filters without page reloads or layout shifts.",
+        solution:
+          "Designed a lightweight in-memory filtering engine on React state, combined with optimized debounced index queries.",
+      },
+    ],
+    features: [
+      {
+        title: "Headless E-Commerce Catalog",
+        description:
+          "Sub-second listing loading and browsing using decoupled API feeds.",
+      },
+      {
+        title: "Fabric & Style Filtering",
+        description:
+          "Custom filtering grids to easily sort by Banarasi Silk, Georgette, Cotton, and specific embroidery styles.",
+      },
+      {
+        title: "Sleek Translucent UI",
+        description:
+          "Elegant dark mode design emphasizing luxury branding, subtle gold gradients, and typography.",
+      },
+    ],
+    metrics: [
+      { label: "Page Load", value: "< 1.8s" },
+      { label: "Mobile Score", value: "94+" },
+      { label: "Checkout CTR", value: "+28%" },
+    ],
+    outcomes: [
+      "Successfully launched live, high-performance saree storefront for Triluna Fashion",
+      "Reduced shopping cart drop-offs by 22% through simplified steps",
+      "Delivered state-of-the-art catalog image rendering with AVIF optimization",
+    ],
+    learnings: [
+      "Headless Shopify architectures significantly improve page speed compared to standard templates",
+      "Premium styling variables (colors, fonts) dramatically influence customer trust in high-ticket ethnic items",
+      "Optimizing Web Vitals directly impacts conversion rates and organic SEO rankings",
     ],
   },
   "mclaren-infovision": {
@@ -680,8 +698,8 @@ export const CaseStudy: React.FC = () => {
   const journeyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // For CRM Vision and Appexorbit: reveal journey steps as they scroll into view
-    if ((id !== "crm-vision" && id !== "appexorbit") || !journeyRef.current)
+    // For CRM InfoVision and NivasSetu: reveal journey steps as they scroll into view
+    if ((id !== "crm-infovision" && id !== "nivassetu") || !journeyRef.current)
       return;
 
     const steps = journeyRef.current.querySelectorAll(".journey-step");
@@ -721,33 +739,34 @@ export const CaseStudy: React.FC = () => {
       {/* Hero Section */}
       <section className="case-study-hero">
         <div className="container">
-          <div className="case-study-hero__content">
-            <span className="case-study-hero__category">{study.category}</span>
-            <h1 className="case-study-hero__title">{study.title}</h1>
-            <p className="case-study-hero__tagline">{study.tagline}</p>
-            <div className="case-study-hero__actions">
-              {study.liveUrl === "#apk" ? (
-                <a href="/app-release.apk" download="appexorbit.apk">
-                  <Button variant="primary" size="lg">
-                    Download APK
+          <div className="case-study-hero__grid">
+            <div className="case-study-hero__content">
+              <span className="case-study-hero__category">{study.category}</span>
+              <h1 className="case-study-hero__title">{study.title}</h1>
+              <p className="case-study-hero__tagline">{study.tagline}</p>
+              <div className="case-study-hero__actions">
+                {study.liveUrl !== "#" ? (
+                  <a
+                    href={study.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button variant="primary" size="lg">
+                      View Live Site
+                    </Button>
+                  </a>
+                ) : null}
+                <Link to="/work">
+                  <Button variant="outline" size="lg">
+                    Back to Projects
                   </Button>
-                </a>
-              ) : study.liveUrl !== "#" ? (
-                <a
-                  href={study.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button variant="primary" size="lg">
-                    View Live Site
-                  </Button>
-                </a>
-              ) : null}
-              <Link to="/work">
-                <Button variant="outline" size="lg">
-                  Back to Projects
-                </Button>
-              </Link>
+                </Link>
+              </div>
+            </div>
+            <div className="case-study-hero__visual-wrapper">
+              <div className="case-study-hero__visual">
+                <ProductVisual id={study.id} />
+              </div>
             </div>
           </div>
         </div>
@@ -843,8 +862,8 @@ export const CaseStudy: React.FC = () => {
         </div>
       </section>
 
-      {/* CRM Journey Path - Only for CRM Vision */}
-      {id === "crm-vision" && (
+      {/* CRM Journey Path - Only for CRM InfoVision */}
+      {id === "crm-infovision" && (
         <section className="crm-journey-section" ref={journeyRef}>
           <div className="container">
             <h2 className="text-center">Development Journey</h2>
@@ -1076,14 +1095,13 @@ export const CaseStudy: React.FC = () => {
           </div>
         </section>
       )}
-
-      {/* Appexorbit Journey Path - Only for Appexorbit */}
-      {id === "appexorbit" && (
+      {/* NivasSetu Journey Path - Only for NivasSetu */}
+      {id === "nivassetu" && (
         <section className="crm-journey-section" ref={journeyRef}>
           <div className="container">
             <h2 className="text-center">Development Journey</h2>
             <p className="crm-journey-subtitle text-center">
-              Building a cross-platform mobile app with Expo and Firebase
+              Direct connection and trust - building NivasSetu
             </p>
 
             <div className="crm-journey-path">
@@ -1095,16 +1113,15 @@ export const CaseStudy: React.FC = () => {
                     <span className="journey-number">01</span>
                     <div className="journey-icon"></div>
                   </div>
-                  <h3>Expo Setup</h3>
+                  <h3>Solution & Schema Design</h3>
                   <p>
-                    Initialized Expo project with TypeScript template.
-                    Configured EAS Build, set up directory structure with
-                    components, services, and hooks folders.
+                    Mapped user flows and designed the database schema in PostgreSQL.
+                    Created relational schemas separating landlords, tenants, listings, and verification tokens.
                   </p>
                   <div className="journey-tags">
-                    <span>TypeScript 97.3%</span>
-                    <span>Expo SDK</span>
-                    <span>EAS Build</span>
+                    <span>Database Design</span>
+                    <span>PostgreSQL</span>
+                    <span>Direct Rent</span>
                   </div>
                 </div>
               </div>
@@ -1117,16 +1134,15 @@ export const CaseStudy: React.FC = () => {
                     <span className="journey-number">02</span>
                     <div className="journey-icon"></div>
                   </div>
-                  <h3>Firebase Integration</h3>
+                  <h3>Aadhaar KYC Setup</h3>
                   <p>
-                    Integrated Firebase SDK with Authentication, Firestore, and
-                    Storage. Created firebase.ts with TypeScript interfaces and
-                    initialized Firebase services.
+                    Integrated Aadhaar KYC API verification to ensure authenticity of listings.
+                    Created backend verification services in NestJS to validate identity documents.
                   </p>
                   <div className="journey-tags">
-                    <span>Firebase Auth</span>
-                    <span>Firestore</span>
-                    <span>Storage</span>
+                    <span>NestJS</span>
+                    <span>KYC API</span>
+                    <span>Security</span>
                   </div>
                 </div>
               </div>
@@ -1139,16 +1155,15 @@ export const CaseStudy: React.FC = () => {
                     <span className="journey-number">03</span>
                     <div className="journey-icon"></div>
                   </div>
-                  <h3>Authentication System</h3>
+                  <h3>Google Maps API Integration</h3>
                   <p>
-                    Built complete auth with email/password, Google Sign-In, and
-                    saved login feature. Implemented secure token storage and
-                    automatic session restoration.
+                    Implemented spatial geocoding and real-time interactive search.
+                    Created marker overlays and custom clustering options for smooth performance.
                   </p>
                   <div className="journey-tags">
-                    <span>Email Auth</span>
-                    <span>Google OAuth</span>
-                    <span>Saved Login</span>
+                    <span>Google Maps API</span>
+                    <span>Spatial Search</span>
+                    <span>Geocoding</span>
                   </div>
                 </div>
               </div>
@@ -1161,148 +1176,15 @@ export const CaseStudy: React.FC = () => {
                     <span className="journey-number">04</span>
                     <div className="journey-icon"></div>
                   </div>
-                  <h3>Firestore Database</h3>
+                  <h3>VPS Deployment</h3>
                   <p>
-                    Designed Firestore schema with collections and documents.
-                    Implemented real-time listeners, optimized compound indexes,
-                    and offline persistence.
+                    Deployed NestJS backend and React frontend onto a secure Virtual Private Server (VPS).
+                    Configured Nginx reverse proxy, SSL certificates, and PM2 process monitoring.
                   </p>
                   <div className="journey-tags">
-                    <span>Real-time</span>
-                    <span>Indexes</span>
-                    <span>Offline</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 5 */}
-              <div className="journey-step journey-step--left">
-                <div className="journey-connector"></div>
-                <div className="journey-card">
-                  <div className="journey-header">
-                    <span className="journey-number">05</span>
-                    <div className="journey-icon"></div>
-                  </div>
-                  <h3>Global Image System</h3>
-                  <p>
-                    Created universal image upload/download system with Firebase
-                    Storage. Features progress tracking, error handling, and
-                    optimized image compression.
-                  </p>
-                  <div className="journey-tags">
-                    <span>Upload</span>
-                    <span>Download</span>
-                    <span>Compression</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 6 */}
-              <div className="journey-step journey-step--right">
-                <div className="journey-connector"></div>
-                <div className="journey-card">
-                  <div className="journey-header">
-                    <span className="journey-number">06</span>
-                    <div className="journey-icon"></div>
-                  </div>
-                  <h3>Material Design 3</h3>
-                  <p>
-                    Implemented Material You components with dynamic color
-                    theming, adaptive layouts, and platform-specific navigation
-                    patterns for iOS and Android.
-                  </p>
-                  <div className="journey-tags">
-                    <span>Material You</span>
-                    <span>Theming</span>
-                    <span>Adaptive</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 7 */}
-              <div className="journey-step journey-step--left">
-                <div className="journey-connector"></div>
-                <div className="journey-card">
-                  <div className="journey-header">
-                    <span className="journey-number">07</span>
-                    <div className="journey-icon"></div>
-                  </div>
-                  <h3>Custom Hooks</h3>
-                  <p>
-                    Built reusable hooks for Firebase operations, auth state,
-                    and data fetching. Created custom hooks directory with
-                    TypeScript generics for type safety.
-                  </p>
-                  <div className="journey-tags">
-                    <span>React Hooks</span>
-                    <span>TypeScript</span>
-                    <span>Reusable</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 8 */}
-              <div className="journey-step journey-step--right">
-                <div className="journey-connector"></div>
-                <div className="journey-card">
-                  <div className="journey-header">
-                    <span className="journey-number">08</span>
-                    <div className="journey-icon"></div>
-                  </div>
-                  <h3>Android Build</h3>
-                  <p>
-                    Configured Android-specific settings in android/ directory
-                    with Kotlin 1.5%. Set up build.gradle, AndroidManifest.xml,
-                    and native module integration.
-                  </p>
-                  <div className="journey-tags">
-                    <span>Android</span>
-                    <span>Kotlin 1.5%</span>
-                    <span>Native</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 9 */}
-              <div className="journey-step journey-step--left">
-                <div className="journey-connector"></div>
-                <div className="journey-card">
-                  <div className="journey-header">
-                    <span className="journey-number">09</span>
-                    <div className="journey-icon">📝</div>
-                  </div>
-                  <h3>Documentation</h3>
-                  <p>
-                    Created comprehensive docs: SAVED_LOGIN_FEATURE.md,
-                    GLOBAL_IMAGE_SYSTEM.md, and FIREBASE_INDEX_FIX.md for
-                    feature implementation and optimization.
-                  </p>
-                  <div className="journey-tags">
-                    <span>Markdown</span>
-                    <span>Features</span>
-                    <span>Guides</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 10 */}
-              <div className="journey-step journey-step--right">
-                <div className="journey-connector"></div>
-                <div className="journey-card">
-                  <div className="journey-header">
-                    <span className="journey-number">10</span>
-                    <div className="journey-icon">✨</div>
-                  </div>
-                  <h3>Production Build</h3>
-                  <p>
-                    Generated production APK using EAS Build with
-                    platform-specific configurations. Completed with 7+ commits
-                    and full Firebase integration.
-                  </p>
-                  <div className="journey-tags">
-                    <span>EAS Build</span>
-                    <span>APK</span>
-                    <span>Production</span>
+                    <span>VPS Deployment</span>
+                    <span>Nginx & SSL</span>
+                    <span>PM2 Runner</span>
                   </div>
                 </div>
               </div>

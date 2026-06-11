@@ -56,6 +56,23 @@ const CookiesPolicy = lazy(() =>
   })),
 );
 
+// New dynamic pages for SEO
+const LocationPage = lazy(() =>
+  import("./pages/LocationPage").then((module) => ({
+    default: module.LocationPage,
+  })),
+);
+const IndustryPage = lazy(() =>
+  import("./pages/IndustryPage").then((module) => ({
+    default: module.IndustryPage,
+  })),
+);
+const Blog = lazy(() =>
+  import("./pages/Blog").then((module) => ({
+    default: module.Blog,
+  })),
+);
+
 // Minimal loading component
 const PageLoader = () => (
   <div
@@ -110,7 +127,24 @@ const BackgroundLayer = memo(() => {
       navigator.connection &&
       navigator.connection.saveData;
 
-    if (prefersReducedMotion || hasSaveDataPreference) {
+    // Check for WebGL support
+    const supportsWebGL = (() => {
+      try {
+        const canvas = document.createElement("canvas");
+        return !!(
+          window.WebGLRenderingContext &&
+          (canvas.getContext("webgl") || canvas.getContext("experimental-webgl"))
+        );
+      } catch (e) {
+        return false;
+      }
+    })();
+
+    if (
+      prefersReducedMotion ||
+      hasSaveDataPreference ||
+      !supportsWebGL
+    ) {
       setShowThreeScene(false);
       return;
     }
@@ -169,6 +203,7 @@ const AppContent = memo(() => {
         <main>
           <Suspense fallback={<PageLoader />}>
             <Routes>
+              {/* Core Pages */}
               <Route path="/" element={<Home />} />
               <Route path="/services" element={<Services />} />
               <Route path="/services/:slug" element={<Services />} />
@@ -176,6 +211,26 @@ const AppContent = memo(() => {
               <Route path="/case-study/:id" element={<CaseStudy />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
+              
+              {/* Blog System Routes */}
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<Blog />} />
+
+              {/* Local SEO Landing Pages */}
+              <Route path="/web-development-company-in-surat" element={<LocationPage />} />
+              <Route path="/mobile-app-development-company-in-ahmedabad" element={<LocationPage />} />
+              <Route path="/software-development-company-in-gujarat" element={<LocationPage />} />
+              <Route path="/flutter-app-development-company-in-india" element={<LocationPage />} />
+              <Route path="/website-development-company-in-india" element={<LocationPage />} />
+
+              {/* Industry Solutions Pages */}
+              <Route path="/software-for-real-estate" element={<IndustryPage />} />
+              <Route path="/software-for-healthcare" element={<IndustryPage />} />
+              <Route path="/software-for-education" element={<IndustryPage />} />
+              <Route path="/software-for-finance" element={<IndustryPage />} />
+              <Route path="/software-for-startups" element={<IndustryPage />} />
+
+              {/* Policy Pages */}
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-service" element={<TermsOfService />} />

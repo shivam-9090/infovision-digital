@@ -17,7 +17,6 @@ export const NotFound: React.FC = () => {
           >
             <div className="not-found__code">
               <h1>404</h1>
-              <div className="not-found__glow"></div>
             </div>
 
             <h2 className="not-found__title">Page Not Found</h2>

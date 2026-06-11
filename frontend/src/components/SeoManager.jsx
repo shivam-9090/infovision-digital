@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { blogPosts } from "../utils/blogData";
 
 const SITE_NAME = "InfoVision Portfolio";
 const SITE_URL = "https://infovision.digital";
@@ -51,24 +52,181 @@ const routeMeta = {
     description: "Cookie policy for InfoVision portfolio website.",
     index: false,
   },
+  "/blog": {
+    title: "InfoVision Blog | Technical SEO, Web & AI Development",
+    description: "Latest insights on React, Flutter, Node.js performance, AI model deployment, and enterprise software engineering.",
+    index: true,
+  }
 };
 
-const startsWithMeta = [
-  {
-    startsWith: "/case-study/",
-    title: "Case Study | InfoVision",
-    description:
-      "Detailed case study covering project goals, technical execution, and measurable outcomes.",
-    index: true,
+const SERVICE_META = {
+  "web-development": {
+    title: "Full Stack Web Development Services | InfoVision",
+    description: "Enterprise-grade web application development using React, Node.js, and TypeScript. Scalable, performant, and secure solutions.",
+    index: true
   },
-  {
-    startsWith: "/services/",
-    title: "Service Details | InfoVision",
-    description:
-      "Detailed web development service information, technology stack, and delivery process.",
-    index: true,
+  "mobile-app-development": {
+    title: "Cross-Platform Mobile App Development | InfoVision",
+    description: "Build native-performing iOS and Android applications with Expo, React Native, and robust backend integrations.",
+    index: true
   },
-];
+  "flutter-development": {
+    title: "Flutter App Development Company | InfoVision",
+    description: "Native Android & iOS apps with Flutter. High-performance, custom animations, Impeller rendering, and fast time-to-market.",
+    index: true
+  },
+  "ui-ux-design": {
+    title: "UI/UX Design & Prototyping Services | InfoVision",
+    description: "User-centric UI/UX design, interactive wireframes, custom animations, and responsive layouts designed to maximize conversions.",
+    index: true
+  },
+  "ecommerce-development": {
+    title: "E-commerce Platform Development | InfoVision",
+    description: "Custom e-commerce storefronts, payment integrations, cart optimizations, and responsive designs that grow sales.",
+    index: true
+  },
+  "seo-services": {
+    title: "SEO & Web Performance Optimization Services | InfoVision",
+    description: "Increase organic rankings, speed up page load speeds, and optimize Core Web Vitals (LCP, FID, CLS, INP) for Google and AI Search Engines.",
+    index: true
+  },
+  "digital-marketing": {
+    title: "Digital Marketing & Conversion Funnel Strategy | InfoVision",
+    description: "Scale user acquisition with conversion optimization, marketing integration, and SEO campaigns designed for high-intent traffic.",
+    index: true
+  },
+  "custom-software-development": {
+    title: "Custom Software Engineering & Architecture | InfoVision",
+    description: "Bespoke software solutions built for enterprise stability. Multi-workspace dashboards, role permissions, and scalable API systems.",
+    index: true
+  },
+  "cloud-consulting": {
+    title: "Cloud Architecture & DevOps Consulting | InfoVision",
+    description: "AWS infrastructure, Docker containerization, CI/CD pipelines, and Terraform configurations for high-availability workloads.",
+    index: true
+  },
+  "ai-development": {
+    title: "AI/ML Integration & LLM Engineering Services | InfoVision",
+    description: "Integrate PyTorch/TensorFlow models, OpenAI APIs, and custom 4.5B LLM solutions into your business pipelines.",
+    index: true
+  }
+};
+
+const LOCATION_META = {
+  "web-development-company-in-surat": {
+    title: "Web Development Company in Surat | Custom Web Apps | InfoVision",
+    description: "Top web development agency in Surat, Gujarat. We build custom React, Node.js, and full-stack software solutions for local and global businesses.",
+    index: true,
+    address: {
+      streetAddress: "C-41, Sumeru City Mall",
+      addressLocality: "Surat",
+      addressRegion: "Gujarat",
+      postalCode: "395009",
+      addressCountry: "IN"
+    },
+    geo: {
+      latitude: "21.1702",
+      longitude: "72.8311"
+    },
+    telephone: "+91-78618-86462"
+  },
+  "mobile-app-development-company-in-ahmedabad": {
+    title: "Mobile App Development Company in Ahmedabad | InfoVision",
+    description: "Top mobile application agency in Ahmedabad. High-performance iOS and Android apps using React Native and Flutter with Firebase backend.",
+    index: true,
+    address: {
+      streetAddress: "S.G. Highway, Bodakdev",
+      addressLocality: "Ahmedabad",
+      addressRegion: "Gujarat",
+      postalCode: "380054",
+      addressCountry: "IN"
+    },
+    geo: {
+      latitude: "23.0225",
+      longitude: "72.5714"
+    },
+    telephone: "+91-87805-46982"
+  },
+  "software-development-company-in-gujarat": {
+    title: "Software Development Company in Gujarat | Enterprise Apps | InfoVision",
+    description: "InfoVision is a premier custom software engineering and IT consulting company in Gujarat, building enterprise applications and AI solutions.",
+    index: true,
+    address: {
+      streetAddress: "Sumeru City Mall, Near Sudama Chowk",
+      addressLocality: "Surat",
+      addressRegion: "Gujarat",
+      postalCode: "395009",
+      addressCountry: "IN"
+    },
+    geo: {
+      latitude: "21.1702",
+      longitude: "72.8311"
+    },
+    telephone: "+91-78618-86462"
+  },
+  "flutter-app-development-company-in-india": {
+    title: "Flutter App Development Company in India | InfoVision",
+    description: "Offshore Flutter app development services in India. High-performance, cost-effective cross-platform iOS and Android mobile solutions.",
+    index: true,
+    address: {
+      streetAddress: "C-41, Sumeru City Mall",
+      addressLocality: "Surat",
+      addressRegion: "Gujarat",
+      postalCode: "395009",
+      addressCountry: "IN"
+    },
+    geo: {
+      latitude: "21.1702",
+      longitude: "72.8311"
+    },
+    telephone: "+91-78618-86462"
+  },
+  "website-development-company-in-india": {
+    title: "Website Development Company in India | Top React Developers | InfoVision",
+    description: "Hire top web development developers in India. High-performance, SEO-optimized business websites and SaaS platforms built to scale.",
+    index: true,
+    address: {
+      streetAddress: "C-41, Sumeru City Mall",
+      addressLocality: "Surat",
+      addressRegion: "Gujarat",
+      postalCode: "395009",
+      addressCountry: "IN"
+    },
+    geo: {
+      latitude: "21.1702",
+      longitude: "72.8311"
+    },
+    telephone: "+91-78618-86462"
+  }
+};
+
+const INDUSTRY_META = {
+  "software-for-real-estate": {
+    title: "Real Estate Software Development | Property Portals | InfoVision",
+    description: "Custom real estate software solutions. MLS integrations, property search portals, visual mapping, and CRM pipelines for brokers.",
+    index: true
+  },
+  "software-for-healthcare": {
+    title: "Healthcare Software Development | HIPAA Compliant Apps | InfoVision",
+    description: "Custom healthcare software engineering. HIPAA-compliant patient portals, telehealth integrations, and medical data pipelines.",
+    index: true
+  },
+  "software-for-education": {
+    title: "EdTech & Education Software Solutions | LMS Platforms | InfoVision",
+    description: "Custom learning management systems (LMS), student tracking dashboards, online quiz engines, and interactive classroom portals.",
+    index: true
+  },
+  "software-for-finance": {
+    title: "FinTech & Financial Software Development | InfoVision",
+    description: "Secure financial software engineering. PCI-DSS compliant payment gateways, invoice pipelines, and real-time dashboard analytics.",
+    index: true
+  },
+  "software-for-startups": {
+    title: "Software Development Services for Startups | MVP Engineering",
+    description: "Accelerate your launch with agile MVP software development. Node.js backend, React frontend, fast deployment, and scalable databases.",
+    index: true
+  }
+};
 
 const CASE_STUDY_META = {
   "crm-infovision": {
@@ -91,15 +249,20 @@ const CASE_STUDY_META = {
     description:
       "Case study for Sifera V1 foundational model release process, baseline setup, and lessons.",
   },
-  exora: {
-    title: "Exora Case Study | E-commerce Web Platform",
+  catalstudio: {
+    title: "CatalStudio Case Study | AI Catalog Generation",
     description:
-      "Case study of Exora e-commerce platform with product flows, UX, and deployment highlights.",
+      "Case study of CatalStudio, an AI-powered e-commerce catalog variation & generative image studio.",
   },
-  appexorbit: {
-    title: "Appexorbit Case Study | React Native + Firebase",
+  nivassetu: {
+    title: "NivasSetu Case Study | Zero-Brokerage Rentals",
     description:
-      "Case study of Appexorbit mobile app architecture, Firebase integration, and production readiness.",
+      "Case study of NivasSetu zero-brokerage rental platform, KYC verification, and direct listings engine.",
+  },
+  trilunafashion: {
+    title: "Triluna Fashion Case Study | Saree E-Commerce Store",
+    description:
+      "Case study of Triluna Fashion premium saree e-commerce storefront, catalog performance, and headless Shopify integration.",
   },
   "mclaren-infovision": {
     title: "McLaren InfoVision Case Study | 3D Web Experience",
@@ -117,6 +280,7 @@ const PATH_LABELS = {
   "/privacy-policy": "Privacy Policy",
   "/terms-of-service": "Terms of Service",
   "/cookies": "Cookies Policy",
+  "/blog": "Blog",
 };
 
 const LEGAL_ALIASES = {
@@ -129,60 +293,59 @@ const LEGAL_ALIASES = {
 
 const ensureMetaTag = (name) => {
   let tag = document.querySelector(`meta[name="${name}"]`);
-
   if (!tag) {
     tag = document.createElement("meta");
     tag.setAttribute("name", name);
     document.head.appendChild(tag);
   }
-
   return tag;
 };
 
 const ensurePropertyMetaTag = (property) => {
   let tag = document.querySelector(`meta[property="${property}"]`);
-
   if (!tag) {
     tag = document.createElement("meta");
     tag.setAttribute("property", property);
     document.head.appendChild(tag);
   }
-
   return tag;
 };
 
 const ensureCanonicalLink = () => {
   let link = document.querySelector("link[rel='canonical']");
-
   if (!link) {
     link = document.createElement("link");
     link.setAttribute("rel", "canonical");
     document.head.appendChild(link);
   }
-
   return link;
 };
 
 const ensureJsonLdScript = (key) => {
   let script = document.querySelector(`script[data-seo="${key}"]`);
-
   if (!script) {
     script = document.createElement("script");
     script.setAttribute("type", "application/ld+json");
     script.setAttribute("data-seo", key);
     document.head.appendChild(script);
   }
-
   return script;
+};
+
+const removeJsonLdScript = (key) => {
+  const script = document.querySelector(`script[data-seo="${key}"]`);
+  if (script) {
+    script.remove();
+  }
 };
 
 const resolveMeta = (pathname) => {
   const normalizedPath = LEGAL_ALIASES[pathname] ?? pathname;
 
+  // 1. Case Study match
   if (normalizedPath.startsWith("/case-study/")) {
     const slug = normalizedPath.replace("/case-study/", "");
     const caseStudyMeta = CASE_STUDY_META[slug];
-
     if (caseStudyMeta) {
       return {
         ...caseStudyMeta,
@@ -191,20 +354,48 @@ const resolveMeta = (pathname) => {
     }
   }
 
+  // 2. Services detail match
+  if (normalizedPath.startsWith("/services/")) {
+    const slug = normalizedPath.replace("/services/", "");
+    const serviceMeta = SERVICE_META[slug];
+    if (serviceMeta) {
+      return serviceMeta;
+    }
+  }
+
+  // 3. Blog detail match
+  if (normalizedPath.startsWith("/blog/")) {
+    const slug = normalizedPath.replace("/blog/", "");
+    const blogPost = blogPosts.find(p => p.slug === slug);
+    if (blogPost) {
+      return {
+        title: `${blogPost.title} | InfoVision Blog`,
+        description: blogPost.excerpt,
+        index: true,
+        blogPost
+      };
+    }
+  }
+
+  // 4. Location flat URLs match
+  const locSlug = normalizedPath.replace("/", "");
+  if (LOCATION_META[locSlug]) {
+    return LOCATION_META[locSlug];
+  }
+
+  // 5. Industry flat URLs match
+  const indSlug = normalizedPath.replace("/", "");
+  if (INDUSTRY_META[indSlug]) {
+    return INDUSTRY_META[indSlug];
+  }
+
+  // 6. Direct static route mapping
   if (routeMeta[normalizedPath]) {
     return routeMeta[normalizedPath];
   }
 
   if (routeMeta[pathname]) {
     return routeMeta[pathname];
-  }
-
-  const prefixMatch = startsWithMeta.find((item) =>
-    pathname.startsWith(item.startsWith),
-  );
-
-  if (prefixMatch) {
-    return prefixMatch;
   }
 
   return {
@@ -218,11 +409,6 @@ const resolveCanonicalPath = (pathname) => {
   if (LEGAL_ALIASES[pathname]) {
     return LEGAL_ALIASES[pathname];
   }
-
-  if (pathname.startsWith("/services/")) {
-    return "/services";
-  }
-
   return pathname;
 };
 
@@ -244,10 +430,8 @@ const buildBreadcrumbList = (canonicalPath) => {
   ];
 
   let currentPath = "";
-
   segments.forEach((segment, index) => {
     currentPath += `/${segment}`;
-
     items.push({
       "@type": "ListItem",
       position: index + 2,
@@ -282,29 +466,21 @@ export const SeoManager = () => {
         : "noindex, nofollow",
     );
 
-    ensurePropertyMetaTag("og:type").setAttribute("content", "website");
+    ensurePropertyMetaTag("og:type").setAttribute("content", pathname.startsWith("/blog/") ? "article" : "website");
     ensurePropertyMetaTag("og:title").setAttribute("content", meta.title);
-    ensurePropertyMetaTag("og:description").setAttribute(
-      "content",
-      meta.description,
-    );
+    ensurePropertyMetaTag("og:description").setAttribute("content", meta.description);
     ensurePropertyMetaTag("og:url").setAttribute("content", canonicalUrl);
     ensurePropertyMetaTag("og:site_name").setAttribute("content", SITE_NAME);
     ensurePropertyMetaTag("og:image").setAttribute("content", DEFAULT_IMAGE);
 
-    ensureMetaTag("twitter:card").setAttribute(
-      "content",
-      "summary_large_image",
-    );
+    ensureMetaTag("twitter:card").setAttribute("content", "summary_large_image");
     ensureMetaTag("twitter:title").setAttribute("content", meta.title);
-    ensureMetaTag("twitter:description").setAttribute(
-      "content",
-      meta.description,
-    );
+    ensureMetaTag("twitter:description").setAttribute("content", meta.description);
     ensureMetaTag("twitter:image").setAttribute("content", DEFAULT_IMAGE);
 
     ensureCanonicalLink().setAttribute("href", canonicalUrl);
 
+    // Standard website and organization schemas
     const websiteSchema = {
       "@context": "https://schema.org",
       "@type": "WebSite",
@@ -335,11 +511,148 @@ export const SeoManager = () => {
     };
 
     ensureJsonLdScript("website").textContent = JSON.stringify(websiteSchema);
-    ensureJsonLdScript("organization").textContent =
-      JSON.stringify(organizationSchema);
-    ensureJsonLdScript("breadcrumb").textContent = JSON.stringify(
-      buildBreadcrumbList(canonicalPath),
-    );
+    ensureJsonLdScript("organization").textContent = JSON.stringify(organizationSchema);
+    ensureJsonLdScript("breadcrumb").textContent = JSON.stringify(buildBreadcrumbList(canonicalPath));
+
+    // Dynamic Schema Injection
+
+    // 1. LocalBusiness Schema for Location Pages
+    const locSlug = pathname.replace("/", "");
+    if (LOCATION_META[locSlug]) {
+      const locData = LOCATION_META[locSlug];
+      const localBusinessSchema = {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        name: `InfoVision - ${toTitleCase(locSlug.split("-in-")[1] || "Gujarat")}`,
+        url: canonicalUrl,
+        logo: DEFAULT_IMAGE,
+        image: DEFAULT_IMAGE,
+        telephone: locData.telephone,
+        address: {
+          "@type": "PostalAddress",
+          ...locData.address
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          ...locData.geo
+        },
+        openingHoursSpecification: {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          opens: "09:00",
+          closes: "18:00"
+        }
+      };
+      ensureJsonLdScript("localBusiness").textContent = JSON.stringify(localBusinessSchema);
+    } else {
+      removeJsonLdScript("localBusiness");
+    }
+
+    // 2. BlogPosting Schema for Blog Detail Page
+    if (pathname.startsWith("/blog/") && meta.blogPost) {
+      const post = meta.blogPost;
+      const blogPostingSchema = {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: post.title,
+        description: post.excerpt,
+        datePublished: post.publishDate,
+        dateModified: post.publishDate,
+        image: DEFAULT_IMAGE,
+        author: {
+          "@type": "Person",
+          name: post.author.name,
+          jobTitle: post.author.role
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "InfoVision",
+          logo: {
+            "@type": "ImageObject",
+            url: DEFAULT_IMAGE
+          }
+        },
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": canonicalUrl
+        }
+      };
+      ensureJsonLdScript("blogPosting").textContent = JSON.stringify(blogPostingSchema);
+    } else {
+      removeJsonLdScript("blogPosting");
+    }
+
+    // 3. Service Schema for Services Detail Pages
+    if (pathname.startsWith("/services/") && pathname !== "/services") {
+      const serviceSlug = pathname.replace("/services/", "");
+      const svcData = SERVICE_META[serviceSlug];
+      if (svcData) {
+        const serviceSchema = {
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: svcData.title,
+          description: svcData.description,
+          provider: {
+            "@type": "Organization",
+            name: "InfoVision",
+            url: SITE_URL
+          }
+        };
+        ensureJsonLdScript("service").textContent = JSON.stringify(serviceSchema);
+      }
+    } else {
+      removeJsonLdScript("service");
+    }
+
+    // 4. FAQ Schema for Homepage and Service Pages
+    if (pathname === "/" || pathname.startsWith("/services")) {
+      let faqs = [];
+      if (pathname === "/") {
+        faqs = [
+          { q: "What services does InfoVision provide?", a: "InfoVision offers enterprise-level software engineering including Full Stack Web Development, mobile applications (Flutter/React Native), WebGL/3D interfaces, and custom AI/LLM deployment." },
+          { q: "What is your typical project timeline?", a: "Most website builds take 4-8 weeks, while complex full-stack portals and mobile apps range from 3-6 months depending on requirements." },
+          { q: "Where is InfoVision located?", a: "Our main development center is located in Surat, Gujarat, India, and we service clients globally." }
+        ];
+      } else if (pathname.startsWith("/services/")) {
+        // Service specific FAQs will be rendered by the Service detail page and schema is fed here
+        const serviceSlug = pathname.replace("/services/", "");
+        if (serviceSlug === "web-development") {
+          faqs = [
+            { q: "Do you use templates or custom code?", a: "We build all full-stack applications from scratch using React, Next.js, and Node.js for maximum performance and security." },
+            { q: "Is database design included in the full-stack package?", a: "Yes, we handle complete database schema design, migrations, and optimization using PostgreSQL and MongoDB." }
+          ];
+        } else if (serviceSlug === "flutter-development" || serviceSlug === "mobile-app-development") {
+          faqs = [
+            { q: "Why do you recommend Flutter?", a: "Flutter offers 60-120 FPS performance, identical UI across iOS/Android, and cuts development costs by compiling from a single codebase." }
+          ];
+        } else {
+          faqs = [
+            { q: "Do you support post-launch maintenance?", a: "Yes, we provide ongoing support, Core Web Vitals maintenance, and scaling improvements on monthly SLA terms." }
+          ];
+        }
+      }
+
+      if (faqs.length > 0) {
+        const faqSchema = {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map(faq => ({
+            "@type": "Question",
+            name: faq.q,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.a
+            }
+          }))
+        };
+        ensureJsonLdScript("faq").textContent = JSON.stringify(faqSchema);
+      } else {
+        removeJsonLdScript("faq");
+      }
+    } else {
+      removeJsonLdScript("faq");
+    }
+
   }, [location]);
 
   return null;
