@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from "react";
+import { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -10,33 +10,25 @@ import { Navigation } from "./components/Navigation";
 import { Footer } from "./components/Footer";
 import { SeoManager } from "./components/SeoManager";
 import { SiteEffects } from "./components/SiteEffects";
-
-const Home = lazy(() => import("./pages/Home").then((m) => ({ default: m.Home })));
-const Services = lazy(() => import("./pages/Services").then((m) => ({ default: m.Services })));
-const Work = lazy(() => import("./pages/Work").then((m) => ({ default: m.Work })));
-const About = lazy(() => import("./pages/About").then((m) => ({ default: m.About })));
-const Contact = lazy(() => import("./pages/Contact").then((m) => ({ default: m.Contact })));
-const CaseStudy = lazy(() => import("./pages/CaseStudy").then((m) => ({ default: m.CaseStudy })));
-const NotFound = lazy(() => import("./pages/NotFound").then((m) => ({ default: m.NotFound })));
-const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy").then((m) => ({ default: m.PrivacyPolicy })));
-const TermsOfService = lazy(() => import("./pages/TermsOfService").then((m) => ({ default: m.TermsOfService })));
-const CookiesPolicy = lazy(() => import("./pages/CookiesPolicy").then((m) => ({ default: m.CookiesPolicy })));
-const LocationPage = lazy(() => import("./pages/LocationPage").then((m) => ({ default: m.LocationPage })));
-const IndustryPage = lazy(() => import("./pages/IndustryPage").then((m) => ({ default: m.IndustryPage })));
-const Blog = lazy(() => import("./pages/Blog").then((m) => ({ default: m.Blog })));
+import { Home } from "./pages/Home";
+import { Services } from "./pages/Services";
+import { Work } from "./pages/Work";
+import { About } from "./pages/About";
+import { Contact } from "./pages/Contact";
+import { CaseStudy } from "./pages/CaseStudy";
+import { NotFound } from "./pages/NotFound";
+import { PrivacyPolicy } from "./pages/PrivacyPolicy";
+import { TermsOfService } from "./pages/TermsOfService";
+import { CookiesPolicy } from "./pages/CookiesPolicy";
+import { LocationPage } from "./pages/LocationPage";
+import { IndustryPage } from "./pages/IndustryPage";
+import { Blog } from "./pages/Blog";
 
 const ScrollManager = () => {
   const location = useLocation();
   useEffect(() => window.scrollTo({ top: 0, behavior: "instant" }), [location.pathname]);
   return null;
 };
-
-const PageLoader = () => (
-  <div className="page-loader" role="status" aria-label="Loading page">
-    <span>IV</span>
-    <i />
-  </div>
-);
 
 const AppShell = () => (
   <div className="app-shell">
@@ -45,8 +37,7 @@ const AppShell = () => (
     <SiteEffects />
     <Navigation />
     <div className="app-main">
-      <Suspense fallback={<PageLoader />}>
-        <Routes>
+      <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services/:slug" element={<Services />} />
@@ -75,8 +66,7 @@ const AppShell = () => (
           <Route path="/cookies" element={<CookiesPolicy />} />
           <Route path="/cookie-policy" element={<CookiesPolicy />} />
           <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Suspense>
+      </Routes>
     </div>
     <Footer />
   </div>
