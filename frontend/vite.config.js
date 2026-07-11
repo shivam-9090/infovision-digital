@@ -5,6 +5,9 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   build: {
+    // Keep route styles in one versioned asset. This prevents first-navigation
+    // failures when a newly deployed SPA still has an older document in cache.
+    cssCodeSplit: false,
     rollupOptions: {
       output: {
         manualChunks(id) {
@@ -16,11 +19,7 @@ export default defineConfig({
             return "three-core";
           }
 
-          if (
-            id.includes("node_modules/react") ||
-            id.includes("node_modules/react-dom") ||
-            id.includes("node_modules/react-router-dom")
-          ) {
+          if (/node_modules\/(react|react-dom|react-router|react-router-dom)\//.test(id)) {
             return "react-vendor";
           }
 
