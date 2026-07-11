@@ -41,14 +41,34 @@
   background: radial-gradient(circle at 75% 35%, rgba(115, 77, 229, .2), transparent 30%);
   border-bottom: 1px solid var(--iv-line);
 }
-.services-page .services-hero__canvas-container { opacity: .55; filter: saturate(.8); }
-.services-page .services-hero__content-container { max-width: 980px; position: relative; z-index: 2; }
+.services-page .main-hero .services-hero__canvas-container {
+  inset: clamp(7.5rem, 11vw, 10rem) var(--iv-gutter) clamp(4rem, 8vw, 7rem) 57%;
+  width: auto;
+  height: auto;
+  opacity: .92;
+  filter: saturate(.9);
+  overflow: hidden;
+  border: 1px solid var(--iv-line);
+  border-radius: 22px;
+  background: radial-gradient(circle at 58% 42%, rgba(99, 68, 205, .19), transparent 38%), rgba(8, 9, 12, .52);
+  box-shadow: 0 35px 90px rgba(0, 0, 0, .34);
+}
+.services-page .main-hero .services-hero__canvas-container::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(7,8,10,.72), transparent 28%), linear-gradient(180deg, rgba(255,255,255,.025), transparent 35%); }
+.services-page .services-hero__visual-head,
+.services-page .services-hero__visual-foot { position: absolute; z-index: 3; left: 1.2rem; right: 1.2rem; display: flex; align-items: center; justify-content: space-between; color: var(--iv-dim); font: 500 .52rem var(--iv-mono); text-transform: uppercase; letter-spacing: .1em; }
+.services-page .services-hero__visual-head { top: 1.1rem; }
+.services-page .services-hero__visual-head b { display: flex; align-items: center; gap: .45rem; color: #b9c890; font-weight: 500; }
+.services-page .services-hero__visual-head i { width: 5px; height: 5px; border-radius: 50%; background: var(--iv-lime); box-shadow: 0 0 10px var(--iv-lime); }
+.services-page .services-hero__visual-foot { bottom: 1.1rem; justify-content: flex-start; gap: 1.1rem; }
+.services-page .services-hero__visual-foot span { display: flex; align-items: center; gap: .4rem; }
+.services-page .services-hero__visual-foot span::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: var(--iv-violet); }
+.services-page .services-hero__content-container { max-width: 760px; position: relative; z-index: 2; }
 .services-page .hero-eyebrow,
 .services-page .cta-eyebrow { color: var(--iv-muted); font: 500 .65rem var(--iv-mono); text-transform: uppercase; letter-spacing: .14em; }
 .services-page .hero-eyebrow::before,
 .services-page .cta-eyebrow::before { content: ""; display: inline-block; width: 30px; height: 1px; background: var(--iv-lime); margin-right: .7rem; vertical-align: middle; }
 .services-page .hero__title,
-.services-page .detailed-hero__title { margin: 1.8rem 0; font-size: clamp(4.4rem, 8.5vw, 9rem); line-height: .84; letter-spacing: -.08em; font-weight: 600; }
+.services-page .detailed-hero__title { margin: 1.8rem 0; font-size: clamp(4.4rem, 7.1vw, 8rem); line-height: .84; letter-spacing: -.08em; font-weight: 600; }
 .services-page .hero__title .text-gradient { display: block; font-family: var(--iv-serif); font-weight: 400; color: transparent; background: none; -webkit-text-stroke: 1px rgba(244,242,236,.62); }
 .services-page .services-hero__subtitle { max-width: 720px; color: var(--iv-muted); font-size: 1.05rem; line-height: 1.75; }
 .services-page .hero__ctas .button,
@@ -73,13 +93,19 @@
 .services-page .card-glass-panel,
 .services-page .sidebar-card,
 .services-page .industry-glass-card { border: 1px solid var(--iv-line); border-radius: 18px; background: rgba(255,255,255,.025); box-shadow: none; backdrop-filter: blur(12px); }
-.services-page .service-card-premium { min-height: 440px; padding: 1.7rem; transition: transform 260ms ease, background 260ms ease, border-color 260ms ease; }
+.services-page .service-card-premium { min-height: 470px; padding: 0; transition: transform 260ms ease, background 260ms ease, border-color 260ms ease; }
 .services-page .service-card-premium:hover { transform: translateY(-7px); background: rgba(255,255,255,.05); border-color: var(--iv-line-strong); }
+.services-page .service-card-premium .card__body { height: 100%; padding: 2rem; display: flex; flex-direction: column; }
+.services-page .service-card-header { display: grid; grid-template-columns: 48px minmax(0, 1fr); align-items: start; gap: 1rem; min-height: 92px; }
 .services-page .service-card-icon-container,
 .services-page .industry-icon-badge,
 .services-page .detailed-hero__icon { color: #08090a; background: var(--iv-lime); border: 0; box-shadow: none; }
-.services-page .service-card-title-meta h3 { font-size: clamp(1.5rem, 2.3vw, 2.3rem); letter-spacing: -.045em; }
+.services-page .service-card-icon-container { flex: 0 0 48px; width: 48px; height: 48px; margin-top: .15rem; border-radius: 9px; overflow: hidden; }
+.services-page .service-card-icon-container svg { width: 23px; height: 23px; min-width: 23px; min-height: 23px; stroke-width: 1.7; }
+.services-page .service-card-title-meta { min-width: 0; }
+.services-page .service-card-title-meta h3 { min-height: 2em; font-size: clamp(1.55rem, 2.05vw, 2.2rem); line-height: .94; letter-spacing: -.045em; }
 .services-page .service-card-desc-premium { color: var(--iv-muted); }
+.services-page .service-card-tech-group { margin-top: auto; }
 .services-page .tech-tag { border: 1px solid var(--iv-line); border-radius: 99px; background: transparent; color: #858690; }
 .services-page .explore-details-link { color: var(--iv-text); font: 500 .6rem var(--iv-mono); text-transform: uppercase; letter-spacing: .06em; }
 
@@ -126,6 +152,9 @@
 .services-page .sidebar-lead-form textarea { background: #090a0d; border-color: var(--iv-line); color: var(--iv-text); }
 
 @media (max-width: 850px) {
+  .services-page .main-hero .services-hero__canvas-container { inset: 16% -8% 12% 52%; opacity: .46; border: 0; background: transparent; box-shadow: none; }
+  .services-page .services-hero__visual-head,
+  .services-page .services-hero__visual-foot { display: none; }
   .services-page .metrics-grid { grid-template-columns: 1fr 1fr; }
   .services-page .detailed-service__layout { grid-template-columns: 1fr; }
 }
@@ -135,6 +164,8 @@
   .services-page .metrics-grid { grid-template-columns: 1fr; }
   .services-page .metric-card { min-height: 120px; }
   .services-page .service-card-premium { min-height: 390px; }
+  .services-page .service-card-premium .card__body { padding: 1.4rem; }
+  .services-page .service-card-header { min-height: 82px; }
   .services-page .comparison-board-panel { overflow-x: auto; }
   .services-page .comparison-grid-header,
   .services-page .comparison-grid-row { min-width: 720px; }

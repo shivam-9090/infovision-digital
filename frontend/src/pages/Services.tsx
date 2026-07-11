@@ -535,6 +535,8 @@ export const Services: React.FC = () => {
       <section className="services-hero main-hero section">
         <div className="services-hero__canvas-container">
           <ServicesHeroVisual />
+          <div className="services-hero__visual-head"><span>System architecture</span><b><i /> Live</b></div>
+          <div className="services-hero__visual-foot"><span>Interface</span><span>Intelligence</span><span>Infrastructure</span></div>
         </div>
         <div className="container">
           <div className="services-hero__content-container">

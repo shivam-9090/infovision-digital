@@ -41,13 +41,17 @@ export const Home = () => {
           </motion.div>
 
           <motion.div className="iv-system-visual" initial={{ opacity: 0, scale: .92 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: .2 }} aria-hidden="true">
+            <div className="iv-system-grid" />
+            <div className="iv-system-hud"><span>Product operating system</span><b><i /> Live</b></div>
+            <div className="iv-system-axis iv-system-axis--x" />
+            <div className="iv-system-axis iv-system-axis--y" />
             <div className="iv-system-visual__orbit iv-system-visual__orbit--one" />
             <div className="iv-system-visual__orbit iv-system-visual__orbit--two" />
-            <div className="iv-system-core"><span>IV</span><small>System online</small></div>
+            <div className="iv-system-core"><div className="iv-system-core__scan" /><span>IV</span><small>System online</small></div>
             <div className="iv-system-node iv-system-node--ai"><i />AI layer</div>
             <div className="iv-system-node iv-system-node--data"><i />Data</div>
             <div className="iv-system-node iv-system-node--ship"><i />Ship</div>
-            <div className="iv-system-console"><span>Production</span><b>99.9% healthy</b><i><em /></i></div>
+            <div className="iv-system-console"><span>Production health</span><b>99.9%</b><small>All systems operational</small><i><em /></i></div>
           </motion.div>
         </div>
         <div className="iv-home-hero__foot container">
