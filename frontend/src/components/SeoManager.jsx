@@ -118,85 +118,50 @@ const LOCATION_META = {
     description: "Top web development agency in Surat, Gujarat. We build custom React, Node.js, and full-stack software solutions for local and global businesses.",
     index: true,
     address: {
-      streetAddress: "C-41, Sumeru City Mall",
       addressLocality: "Surat",
       addressRegion: "Gujarat",
-      postalCode: "395009",
       addressCountry: "IN"
-    },
-    geo: {
-      latitude: "21.1702",
-      longitude: "72.8311"
-    },
-    telephone: "+91-78618-86462"
+    }
   },
   "mobile-app-development-company-in-ahmedabad": {
     title: "Mobile App Development Company in Ahmedabad | InfoVision",
     description: "Top mobile application agency in Ahmedabad. High-performance iOS and Android apps using React Native and Flutter with Firebase backend.",
     index: true,
     address: {
-      streetAddress: "S.G. Highway, Bodakdev",
       addressLocality: "Ahmedabad",
       addressRegion: "Gujarat",
-      postalCode: "380054",
       addressCountry: "IN"
-    },
-    geo: {
-      latitude: "23.0225",
-      longitude: "72.5714"
-    },
-    telephone: "+91-87805-46982"
+    }
   },
   "software-development-company-in-gujarat": {
     title: "Software Development Company in Gujarat | Enterprise Apps | InfoVision",
     description: "InfoVision is a premier custom software engineering and IT consulting company in Gujarat, building enterprise applications and AI solutions.",
     index: true,
     address: {
-      streetAddress: "Sumeru City Mall, Near Sudama Chowk",
       addressLocality: "Surat",
       addressRegion: "Gujarat",
-      postalCode: "395009",
       addressCountry: "IN"
-    },
-    geo: {
-      latitude: "21.1702",
-      longitude: "72.8311"
-    },
-    telephone: "+91-78618-86462"
+    }
   },
   "flutter-app-development-company-in-india": {
     title: "Flutter App Development Company in India | InfoVision",
     description: "Offshore Flutter app development services in India. High-performance, cost-effective cross-platform iOS and Android mobile solutions.",
     index: true,
     address: {
-      streetAddress: "C-41, Sumeru City Mall",
       addressLocality: "Surat",
       addressRegion: "Gujarat",
-      postalCode: "395009",
       addressCountry: "IN"
-    },
-    geo: {
-      latitude: "21.1702",
-      longitude: "72.8311"
-    },
-    telephone: "+91-78618-86462"
+    }
   },
   "website-development-company-in-india": {
     title: "Website Development Company in India | Top React Developers | InfoVision",
     description: "Hire top web development developers in India. High-performance, SEO-optimized business websites and SaaS platforms built to scale.",
     index: true,
     address: {
-      streetAddress: "C-41, Sumeru City Mall",
       addressLocality: "Surat",
       addressRegion: "Gujarat",
-      postalCode: "395009",
       addressCountry: "IN"
-    },
-    geo: {
-      latitude: "21.1702",
-      longitude: "72.8311"
-    },
-    telephone: "+91-78618-86462"
+    }
   }
 };
 
@@ -503,8 +468,7 @@ export const SeoManager = () => {
         {
           "@type": "ContactPoint",
           contactType: "customer support",
-          email: "infovision@gmail.com",
-          telephone: "+91-8780546982",
+          email: "vaghanishivam83@gmail.com",
           availableLanguage: ["English"],
         },
       ],
@@ -527,14 +491,9 @@ export const SeoManager = () => {
         url: canonicalUrl,
         logo: DEFAULT_IMAGE,
         image: DEFAULT_IMAGE,
-        telephone: locData.telephone,
         address: {
           "@type": "PostalAddress",
           ...locData.address
-        },
-        geo: {
-          "@type": "GeoCoordinates",
-          ...locData.geo
         },
         openingHoursSpecification: {
           "@type": "OpeningHoursSpecification",

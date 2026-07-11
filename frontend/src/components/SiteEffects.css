@@ -1,0 +1,87 @@
+.iv-progress {
+  --progress: 0;
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 1000;
+  height: 2px;
+  background: linear-gradient(90deg, var(--iv-lime), var(--iv-cyan), var(--iv-violet));
+  transform: scaleX(var(--progress));
+  transform-origin: left;
+}
+
+.iv-cursor-ring,
+.iv-cursor-dot {
+  --x: -100px;
+  --y: -100px;
+  position: fixed;
+  z-index: 999;
+  pointer-events: none;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+.iv-cursor-ring {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(199, 255, 74, 0.55);
+  transform: translate3d(calc(var(--x) - 20px), calc(var(--y) - 20px), 0);
+  transition: width 180ms ease, height 180ms ease, border-color 180ms ease,
+    background 180ms ease, transform 90ms linear;
+}
+
+.iv-cursor-ring.is-active {
+  width: 64px;
+  height: 64px;
+  border-color: rgba(199, 255, 74, 0.22);
+  background: rgba(199, 255, 74, 0.08);
+  transform: translate3d(calc(var(--x) - 32px), calc(var(--y) - 32px), 0);
+}
+
+.iv-cursor-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--iv-lime);
+  box-shadow: 0 0 14px rgba(199, 255, 74, 0.75);
+  transform: translate3d(calc(var(--x) - 2px), calc(var(--y) - 2px), 0);
+}
+
+.iv-noise {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E");
+}
+
+.iv-ambient {
+  position: fixed;
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(110px);
+  opacity: 0.13;
+  pointer-events: none;
+}
+
+.iv-ambient--one {
+  width: 460px;
+  height: 460px;
+  right: -180px;
+  top: 9vh;
+  background: var(--iv-violet);
+}
+
+.iv-ambient--two {
+  width: 360px;
+  height: 360px;
+  left: -190px;
+  bottom: 4vh;
+  background: #1d67ff;
+}
+
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .iv-cursor-ring,
+  .iv-cursor-dot { display: none; }
+}

@@ -1,229 +1,51 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Card, CardBody } from "../components/Card";
-import { ProductVisual } from "../components/ProductVisual";
-import { WorkHeroVisual } from "../components/WorkHeroVisual";
-import {
-  FaBrain,
-  FaPalette,
-  FaBolt,
-  FaShoppingCart,
-  FaMobileAlt,
-  FaCube,
-  FaChartLine,
-  FaArrowRight,
-} from "react-icons/fa";
+import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import "./Work.css";
 
-interface Project {
-  id: string;
-  caseStudyId: string;
-  title: string;
-  positioning: string;
-  description: string;
-  tags: string[];
-  icon: React.ReactNode;
-  liveUrl: string;
-}
+type Group = "Product" | "AI" | "Experience";
+type Project = { id: string; title: string; group: Group; role: string; description: string; tags: string[]; liveUrl: string; tone: string };
 
 const projects: Project[] = [
-  {
-    id: "crm-infovision",
-    caseStudyId: "crm-infovision",
-    title: "CRM InfoVision",
-    positioning: "Enterprise-grade Sales Pipeline & Real-Time Workspace Lifecycle Analytics",
-    description:
-      "Full-stack client management pipeline built using Next.js 14 and NestJS. Features standardized workspace permissions, multi-tenancy, and automatic Terraform deployment configuration.",
-    tags: ["Next.js", "NestJS", "PostgreSQL", "Docker", "Terraform"],
-    icon: <FaChartLine size={16} />,
-    liveUrl: "https://crm.infovision.digital/",
-  },
-  {
-    id: "infovision-gpt",
-    caseStudyId: "infovision-gpt",
-    title: "InfoVision GPT 4.5B",
-    positioning: "Large Language Model Tuned for Robust Natural Language Processing",
-    description:
-      "A 4.5 billion parameter transformer model pre-trained and published on Hugging Face. Engineered with stable optimization schedules and repeatable checkpoints for structured NLP workflows.",
-    tags: ["PyTorch", "Transformers", "LLM", "Python"],
-    icon: <FaBrain size={16} />,
-    liveUrl: "https://huggingface.co/shivam909067/Infovision-gpt-4.5B",
-  },
-  {
-    id: "image-gen-art",
-    caseStudyId: "image-gen-art",
-    title: "Image Gen Art 01",
-    positioning: "Custom Diffusion Visual Generation Model for High-Quality Coherent Art",
-    description:
-      "Generative visual network specialized in producing consistent, artistic styles across dynamic prompts. Published with baseline metrics to support reproducible generation experiments.",
-    tags: ["Diffusion", "PyTorch", "Computer Vision", "Hugging Face"],
-    icon: <FaPalette size={16} />,
-    liveUrl: "https://huggingface.co/shivam909067/Image-gen-art-01",
-  },
-  {
-    id: "sifera-v1",
-    caseStudyId: "sifera-v1",
-    title: "Sifera V1",
-    positioning: "Foundational Open-Source NLP Baseline for Specialized Downstream Tasks",
-    description:
-      "First generation foundational AI model initiative published in an open ecosystem. Created structured checkpoints and evaluation pipelines to serve as a low-latency model baseline.",
-    tags: ["Deep Learning", "Transformers", "NLP", "Python"],
-    icon: <FaBolt size={16} />,
-    liveUrl: "https://huggingface.co/shivam909067/Sifera-V1",
-  },
-  {
-    id: "catalstudio",
-    caseStudyId: "catalstudio",
-    title: "CatalStudio",
-    positioning: "AI-Powered E-Commerce Catalog Variation & Generative Image Studio",
-    description:
-      "An advanced creative studio for generating hyper-realistic catalog variation assets. Features dynamic multi-angle catalog synthesis, background swapping, and automated image generation.",
-    tags: ["React", "TypeScript", "AI Integration", "Cloudflare Pages"],
-    icon: <FaPalette size={16} />,
-    liveUrl: "https://catalstudio.com/",
-  },
-  {
-    id: "nivassetu",
-    caseStudyId: "nivassetu",
-    title: "NivasSetu",
-    positioning: "Zero-Brokerage Residential Rental Platform & Direct Listings Engine",
-    description:
-      "Zero-brokerage rental portal in Gujarat connecting tenants and owners. Optimized with secure Aadhaar KYC verification, Google Maps spatial geocoding, and custom real-time search.",
-    tags: ["React", "NestJS", "PostgreSQL", "Google Maps API", "Aadhaar KYC"],
-    icon: <FaMobileAlt size={16} />,
-    liveUrl: "https://nivassetu.com/",
-  },
-  {
-    id: "trilunafashion",
-    caseStudyId: "trilunafashion",
-    title: "Triluna Fashion",
-    positioning: "Premium E-Commerce Storefront & High-Performance Catalog for Ethnic Wear",
-    description:
-      "A fast, high-conversion e-commerce platform specializing in premium sarees and ethnic wear. Features a high-fidelity catalog grid, custom filtering systems, and responsive checkout experiences.",
-    tags: ["React", "Shopify API", "CSS Modules", "TailwindCSS", "Core Web Vitals"],
-    icon: <FaShoppingCart size={16} />,
-    liveUrl: "https://trilunafashion.com/",
-  },
-  {
-    id: "mclaren-infovision",
-    caseStudyId: "mclaren-infovision",
-    title: "McLaren InfoVision",
-    positioning: "Cinematic 3D Grand Tourer Interactive Experience with Smooth Camera Paths",
-    description:
-      "WebGL vehicle simulator rendering a detailed McLaren GT. Guided by 7 custom camera path transitions, responsive touch controls, and color customization shaders via Three.js and GSAP.",
-    tags: ["Three.js", "GSAP", "WebGL", "3D Web"],
-    icon: <FaCube size={16} />,
-    liveUrl: "https://mclaren-vision.netlify.app/",
-  },
+  { id:"catalstudio", title:"CatalStudio", group:"AI", role:"AI commerce platform", description:"A production studio for generating consistent, multi-angle e-commerce catalog visuals from a single product image.", tags:["React","TypeScript","Generative AI","Cloudflare"], liveUrl:"https://catalstudio.com/", tone:"violet" },
+  { id:"nivassetu", title:"NivasSetu", group:"Product", role:"PropTech platform", description:"A zero-brokerage rental product connecting owners and tenants with trusted listings, discovery and direct communication.", tags:["Flutter","NestJS","PostgreSQL","Maps"], liveUrl:"https://nivassetu.com/", tone:"cyan" },
+  { id:"crm-infovision", title:"CRM Vision", group:"Product", role:"Business operations", description:"A structured CRM workspace designed around secure access, pipeline visibility and dependable client operations.", tags:["Next.js","NestJS","Postgres","Docker"], liveUrl:"https://crm.infovision.digital/", tone:"lime" },
+  { id:"infovision-gpt", title:"InfoVision GPT", group:"AI", role:"Language model research", description:"A transformer model initiative focused on repeatable training checkpoints and structured natural-language workflows.", tags:["PyTorch","Transformers","Python","LLM"], liveUrl:"https://huggingface.co/shivam909067/Infovision-gpt-4.5B", tone:"orange" },
+  { id:"image-gen-art", title:"Image Gen Art", group:"AI", role:"Computer vision", description:"A diffusion-based visual model exploring coherent artistic generation and reusable evaluation baselines.", tags:["Diffusion","PyTorch","Vision","Hugging Face"], liveUrl:"https://huggingface.co/shivam909067/Image-gen-art-01", tone:"pink" },
+  { id:"trilunafashion", title:"Triluna Fashion", group:"Product", role:"Commerce experience", description:"A responsive fashion storefront focused on fast catalog discovery, product clarity and confident purchase journeys.", tags:["React","Commerce","Responsive UI","Performance"], liveUrl:"https://trilunafashion.com/", tone:"gold" },
+  { id:"mclaren-infovision", title:"McLaren Vision", group:"Experience", role:"Interactive 3D web", description:"A cinematic WebGL vehicle experience with camera choreography, responsive controls and real-time materials.", tags:["Three.js","WebGL","GSAP","3D"], liveUrl:"https://mclaren-vision.netlify.app/", tone:"red" },
+  { id:"sifera-v1", title:"Sifera V1", group:"AI", role:"Open model baseline", description:"A foundational NLP experiment with structured checkpoints and evaluation workflows for downstream research.", tags:["Deep Learning","NLP","Transformers","Python"], liveUrl:"https://huggingface.co/shivam909067/Sifera-V1", tone:"blue" },
 ];
 
-export const Work: React.FC = () => {
-  const navigate = useNavigate();
+const filters: Array<"All" | Group> = ["All", "Product", "AI", "Experience"];
+
+export const Work = () => {
+  const [filter, setFilter] = useState<"All" | Group>("All");
+  const visible = useMemo(() => filter === "All" ? projects : projects.filter((project) => project.group === filter), [filter]);
 
   return (
-    <main className="work-page">
-      <section className="work-header section">
-        <div className="work-header__canvas-container">
-          <WorkHeroVisual />
+    <main className="iv-work" id="top">
+      <section className="iv-work-hero">
+        <div className="container iv-work-hero__grid">
+          <div><span className="iv-kicker">Selected work · 2024—2026</span><h1>Proof lives in the <em>product.</em></h1></div>
+          <div><p>A focused collection of platforms, AI systems, commerce products and interactive experiences built around real technical and business constraints.</p><a href="mailto:vaghanishivam83@gmail.com">Discuss a similar project <span className="iv-arrow">↗</span></a></div>
         </div>
-        <div className="container">
-          <h1 className="work-title">Project <span className="text-gradient">Portfolio</span></h1>
-          <p className="work-header__subtitle">
-            A premium showcase of production applications and foundational AI engineering
-          </p>
-          <p className="work-header__contact-text">
-            Looking for business outcomes? Review our{" "}
-            <Link to="/services">services</Link> or{" "}
-            <Link to="/contact">initiate a project discussion</Link>.
-          </p>
-          <p className="work-header__desc-text">
-            Explore dedicated case study architecture decisions, developmental journeys,
-            and actual client metrics across web, mobile, artificial intelligence, and 3D graphics.
-          </p>
-        </div>
+        <div className="iv-work-marquee"><div>{["Strategy","Interface","Systems","Intelligence","Scale","Strategy","Interface","Systems","Intelligence","Scale"].map((item,index)=><span key={`${item}-${index}`}><i>✦</i>{item}</span>)}</div></div>
       </section>
 
-      <section className="work-grid-section section">
+      <section className="iv-work-index section">
         <div className="container">
-          <div className="work-projects">
-            {projects.map((project) => (
-              <div
-                key={project.id}
-                className="project-card-wrapper"
-                role="button"
-                tabIndex={0}
-                onClick={(e) => {
-                  const target = e.target as HTMLElement;
-                  // If clicking on an action button, let the default handle it
-                  if (target.closest(".action-btn")) {
-                    return;
-                  }
-                  // Otherwise, navigate to the dedicated Case Study page
-                  navigate(`/case-study/${project.caseStudyId}`);
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    navigate(`/case-study/${project.caseStudyId}`);
-                  }
-                }}
-              >
-                <Card variant="bordered" className="project-card">
-                  {/* Top Section: Interactive Visual */}
-                  <div className="project-card__visual-wrapper">
-                    <ProductVisual id={project.id} />
-                  </div>
-
-                  <CardBody className="project-card__body">
-                    {/* Middle Section: Project Title + Positioning */}
-                    <div className="project-card__header">
-                      <div className="project-card__title-row">
-                        <div className="project-card__icon-wrapper">
-                          {project.icon}
-                        </div>
-                        <h3 className="project-card__title">{project.title}</h3>
-                      </div>
-                      <p className="project-card__positioning">{project.positioning}</p>
-                    </div>
-
-                    <p className="project-card__description">
-                      {project.description}
-                    </p>
-
-                    {/* Tags Section */}
-                    <div className="project-card__tags">
-                      {project.tags.map((tag) => (
-                        <span key={tag} className="project-tag">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Actions Section */}
-                    <div className="project-card__actions">
-                      <Link
-                        to={`/case-study/${project.caseStudyId}`}
-                        className="action-btn action-btn--primary"
-                      >
-                        Read Case Study <FaArrowRight className="btn-arrow" />
-                      </Link>
-
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="action-btn action-btn--outline"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        Live Link
-                      </a>
-                    </div>
-                  </CardBody>
-                </Card>
-              </div>
-            ))}
+          <div className="iv-work-toolbar"><span>{String(visible.length).padStart(2,"0")} projects</span><div>{filters.map((item)=><button key={item} className={filter===item?"is-active":""} onClick={()=>setFilter(item)}>{item}</button>)}</div></div>
+          <div className="iv-work-grid">
+            {visible.map((project,index)=><article className={`iv-work-card iv-work-card--${project.tone}`} key={project.id} data-cursor="view">
+              <div className="iv-work-card__meta"><span>{String(index+1).padStart(2,"0")}</span><span>{project.group}</span><span>{project.role}</span></div>
+              <div className="iv-work-card__visual"><div className="iv-work-window"><div><i/><i/><i/></div><span/><b/></div></div>
+              <div className="iv-work-card__body"><div><small>{project.tags.join(" · ")}</small><h2>{project.title}</h2><p>{project.description}</p></div><div className="iv-work-card__actions"><Link to={`/case-study/${project.id}`}>Case study <span className="iv-arrow">↗</span></Link><a href={project.liveUrl} target="_blank" rel="noreferrer">Live product <span className="iv-arrow">↗</span></a></div></div>
+            </article>)}
           </div>
         </div>
       </section>
+
+      <section className="iv-work-cta"><div className="container"><span className="iv-kicker">Next case study</span><h2>Your product<br />could be <em>here.</em></h2><Link to="/contact" className="iv-btn iv-btn--light">Build with InfoVision <span className="iv-arrow">↗</span></Link></div></section>
     </main>
   );
 };

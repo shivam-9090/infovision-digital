@@ -20,6 +20,126 @@
   --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* InfoVision 2026 premium redesign */
+.services-page {
+  --svc-primary: var(--iv-violet);
+  --svc-accent: var(--iv-lime);
+  --svc-bg: var(--iv-bg);
+  --svc-surface: var(--iv-surface);
+  --svc-border: var(--iv-line);
+  --svc-text-primary: var(--iv-text);
+  --svc-text-secondary: var(--iv-muted);
+  padding-top: 6rem;
+  overflow: hidden;
+}
+
+.services-page .services-hero {
+  min-height: 82svh;
+  padding: clamp(6rem, 11vw, 11rem) 0 5rem;
+  display: flex;
+  align-items: center;
+  background: radial-gradient(circle at 75% 35%, rgba(115, 77, 229, .2), transparent 30%);
+  border-bottom: 1px solid var(--iv-line);
+}
+.services-page .services-hero__canvas-container { opacity: .55; filter: saturate(.8); }
+.services-page .services-hero__content-container { max-width: 980px; position: relative; z-index: 2; }
+.services-page .hero-eyebrow,
+.services-page .cta-eyebrow { color: var(--iv-muted); font: 500 .65rem var(--iv-mono); text-transform: uppercase; letter-spacing: .14em; }
+.services-page .hero-eyebrow::before,
+.services-page .cta-eyebrow::before { content: ""; display: inline-block; width: 30px; height: 1px; background: var(--iv-lime); margin-right: .7rem; vertical-align: middle; }
+.services-page .hero__title,
+.services-page .detailed-hero__title { margin: 1.8rem 0; font-size: clamp(4.4rem, 8.5vw, 9rem); line-height: .84; letter-spacing: -.08em; font-weight: 600; }
+.services-page .hero__title .text-gradient { display: block; font-family: var(--iv-serif); font-weight: 400; color: transparent; background: none; -webkit-text-stroke: 1px rgba(244,242,236,.62); }
+.services-page .services-hero__subtitle { max-width: 720px; color: var(--iv-muted); font-size: 1.05rem; line-height: 1.75; }
+.services-page .hero__ctas .button,
+.services-page .services-final-cta .button { min-height: 54px; border-radius: 3px; }
+
+.services-page .trust-metrics-section { border-bottom: 1px solid var(--iv-line); background: transparent; }
+.services-page .metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-left: 1px solid var(--iv-line); }
+.services-page .metric-card { min-height: 150px; padding: 1.5rem; border: 0; border-right: 1px solid var(--iv-line); border-radius: 0; background: transparent; align-items: flex-start; justify-content: space-between; }
+.services-page .metric-number { color: var(--iv-text); font-size: clamp(2.5rem, 4vw, 4.3rem); letter-spacing: -.07em; }
+.services-page .metric-label { color: var(--iv-dim); font: 500 .55rem var(--iv-mono); text-transform: uppercase; letter-spacing: .1em; }
+
+.services-page .section__header { margin-bottom: 3.5rem; }
+.services-page .section__header h2 { font-size: clamp(3rem, 5.6vw, 6rem); font-weight: 600; }
+.services-page .section-subtitle-centered { color: var(--iv-muted); }
+.services-page .tech-filter-bar { display: flex; justify-content: center; gap: .45rem; flex-wrap: wrap; margin-top: 2rem; }
+.services-page .filter-btn { border: 1px solid var(--iv-line); border-radius: 99px; color: var(--iv-muted); background: transparent; font: 500 .56rem var(--iv-mono); text-transform: uppercase; letter-spacing: .07em; padding: .55rem .8rem; }
+.services-page .filter-btn:hover,
+.services-page .filter-btn.active { background: var(--iv-lime); border-color: var(--iv-lime); color: #08090a; }
+
+.services-page .services-grid { gap: 1rem; }
+.services-page .service-card-premium,
+.services-page .card-glass-panel,
+.services-page .sidebar-card,
+.services-page .industry-glass-card { border: 1px solid var(--iv-line); border-radius: 18px; background: rgba(255,255,255,.025); box-shadow: none; backdrop-filter: blur(12px); }
+.services-page .service-card-premium { min-height: 440px; padding: 1.7rem; transition: transform 260ms ease, background 260ms ease, border-color 260ms ease; }
+.services-page .service-card-premium:hover { transform: translateY(-7px); background: rgba(255,255,255,.05); border-color: var(--iv-line-strong); }
+.services-page .service-card-icon-container,
+.services-page .industry-icon-badge,
+.services-page .detailed-hero__icon { color: #08090a; background: var(--iv-lime); border: 0; box-shadow: none; }
+.services-page .service-card-title-meta h3 { font-size: clamp(1.5rem, 2.3vw, 2.3rem); letter-spacing: -.045em; }
+.services-page .service-card-desc-premium { color: var(--iv-muted); }
+.services-page .tech-tag { border: 1px solid var(--iv-line); border-radius: 99px; background: transparent; color: #858690; }
+.services-page .explore-details-link { color: var(--iv-text); font: 500 .6rem var(--iv-mono); text-transform: uppercase; letter-spacing: .06em; }
+
+.services-page .process-section { background: rgba(255,255,255,.012); border-block: 1px solid var(--iv-line); }
+.services-page .process-timeline-v2 { max-width: 1000px; }
+.services-page .timeline-center-line { background: var(--iv-line); }
+.services-page .timeline-step-card .step-card-content { border: 1px solid var(--iv-line); border-radius: 15px; background: #0b0c10; box-shadow: none; }
+.services-page .step-glow-dot { background: var(--iv-lime); box-shadow: 0 0 16px rgba(199,255,74,.5); }
+.services-page .step-number { color: var(--iv-lime); font-family: var(--iv-mono); }
+
+.services-page .comparison-board-panel { border: 1px solid var(--iv-line); border-radius: 18px; background: rgba(255,255,255,.02); box-shadow: none; overflow: hidden; }
+.services-page .comparison-grid-header,
+.services-page .comparison-grid-row { border-color: var(--iv-line); }
+.services-page .comparison-grid-header { background: rgba(255,255,255,.035); }
+.services-page .infovision-col,
+.services-page .us-cell { background: rgba(128,103,255,.08); }
+.services-page .check-badge { color: var(--iv-lime); }
+.services-page .cross-badge { color: #7c7d86; }
+
+.services-page .industries-grid { gap: 1rem; }
+.services-page .industry-glass-card { min-height: 220px; padding: 1.6rem; transition: transform 240ms ease, background 240ms ease; }
+.services-page .industry-glass-card:hover { transform: translateY(-5px); background: rgba(255,255,255,.05); }
+.services-page .faq-accordion-group { border-top: 1px solid var(--iv-line); }
+.services-page .faq-accordion-item { border: 0; border-bottom: 1px solid var(--iv-line); border-radius: 0; background: transparent; }
+.services-page .faq-accordion-trigger { min-height: 88px; color: var(--iv-text); }
+.services-page .accordion-indicator { border-color: var(--iv-line); }
+.services-page .services-final-cta { background: radial-gradient(circle, rgba(105,72,222,.18), transparent 42%); }
+.services-page .final-cta-panel { padding: clamp(3rem, 7vw, 7rem); border: 1px solid var(--iv-line); border-radius: 22px; background: rgba(255,255,255,.02); box-shadow: none; }
+.services-page .final-cta-panel h2 { font-size: clamp(3.2rem, 6vw, 6.5rem); }
+
+/* Detailed service route */
+.services-page .breadcrumb-nav { color: var(--iv-dim); font: 500 .58rem var(--iv-mono); text-transform: uppercase; letter-spacing: .08em; }
+.services-page .services-hero__content-detailed { max-width: 900px; }
+.services-page .detailed-service__layout { gap: 1rem; }
+.services-page .detailed-service__main,
+.services-page .detailed-service__sidebar { gap: 1rem; }
+.services-page .overview-panel,
+.services-page .detailed-deliverables,
+.services-page .detailed-faqs,
+.services-page .sidebar-card { padding: 1.6rem; }
+.services-page .deliverable-item { border-color: var(--iv-line); }
+.services-page .checklist-bullet { background: var(--iv-lime); color: #08090a; }
+.services-page .sidebar-lead-form input,
+.services-page .sidebar-lead-form textarea { background: #090a0d; border-color: var(--iv-line); color: var(--iv-text); }
+
+@media (max-width: 850px) {
+  .services-page .metrics-grid { grid-template-columns: 1fr 1fr; }
+  .services-page .detailed-service__layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .services-page .hero__title,
+  .services-page .detailed-hero__title { font-size: clamp(4rem, 18vw, 6.2rem); }
+  .services-page .metrics-grid { grid-template-columns: 1fr; }
+  .services-page .metric-card { min-height: 120px; }
+  .services-page .service-card-premium { min-height: 390px; }
+  .services-page .comparison-board-panel { overflow-x: auto; }
+  .services-page .comparison-grid-header,
+  .services-page .comparison-grid-row { min-width: 720px; }
+}
+
 .services-page {
   min-height: 100vh;
   background-color: var(--svc-bg-main);

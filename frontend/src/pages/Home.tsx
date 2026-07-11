@@ -1,439 +1,121 @@
-import React, { memo, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Button } from "../components/Button";
-import { ParticleSection } from "../components/ParticleSection";
-import LogoLoop from "../components/LogoLoop";
-import {
-  SiReact,
-  SiNextdotjs,
-  SiTypescript,
-  SiTailwindcss,
-  SiNodedotjs,
-  SiGraphql,
-  SiMongodb,
-  SiPostgresql,
-} from "react-icons/si";
-import { FaArrowRight, FaCode, FaMobileAlt, FaBrain } from "react-icons/fa";
 import "./Home.css";
 
-const techLogos = [
-  { node: <SiReact size={80} />, title: "React", href: "https://react.dev" },
-  {
-    node: <SiNextdotjs size={80} />,
-    title: "Next.js",
-    href: "https://nextjs.org",
-  },
-  {
-    node: <SiTypescript size={80} />,
-    title: "TypeScript",
-    href: "https://www.typescriptlang.org",
-  },
-  {
-    node: <SiTailwindcss size={80} />,
-    title: "Tailwind CSS",
-    href: "https://tailwindcss.com",
-  },
-  {
-    node: <SiNodedotjs size={80} />,
-    title: "Node.js",
-    href: "https://nodejs.org",
-  },
-  {
-    node: <SiGraphql size={80} />,
-    title: "GraphQL",
-    href: "https://graphql.org",
-  },
-  {
-    node: <SiMongodb size={80} />,
-    title: "MongoDB",
-    href: "https://www.mongodb.com",
-  },
-  {
-    node: <SiPostgresql size={80} />,
-    title: "PostgreSQL",
-    href: "https://www.postgresql.org",
-  },
+const services = [
+  { number: "01", title: "Web platforms", copy: "Fast, search-ready digital products engineered with modern React, TypeScript and robust backend systems.", tags: ["React", "Next.js", "Node.js"] },
+  { number: "02", title: "Mobile products", copy: "Cross-platform applications with native-feeling performance, reliable state and production-grade release workflows.", tags: ["Flutter", "Firebase", "APIs"] },
+  { number: "03", title: "AI systems", copy: "Applied AI, computer vision, intelligent automation and LLM workflows connected to real business operations.", tags: ["Python", "PyTorch", "LLMs"] },
+  { number: "04", title: "Cloud & scale", copy: "Containerized infrastructure, data architecture, observability and deployment systems designed to stay dependable.", tags: ["Docker", "Postgres", "Cloud"] },
 ];
 
-const HeroSection = memo(() => (
-  <section className="hero">
-    <div className="container">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="hero__content"
-      >
-        <h1 className="hero__title">
-          We Build Software <br />
-          <span className="text-gradient">That Businesses Depend On</span>
-        </h1>
-        <p className="hero__subtitle">
-          We engineer high-performance web systems, cross-platform mobile apps, and custom AI integrations with a focus on clean design, flawless user experiences, and scalable architecture.
-        </p>
-        <div className="hero__actions">
-          <Link to="/work">
-            <Button variant="primary" size="lg">
-              View Work
-            </Button>
-          </Link>
-          <Link to="/contact">
-            <Button variant="outline" size="lg">
-              Contact Me
-            </Button>
-          </Link>
-        </div>
-      </motion.div>
-    </div>
-  </section>
-));
+const projects = [
+  { number: "01", name: "CatalStudio", category: "AI Commerce", copy: "Generative catalog production for fashion and e-commerce teams.", className: "iv-project--violet", to: "/case-study/catalstudio", tech: "React · AI · Cloudflare" },
+  { number: "02", name: "NivasSetu", category: "PropTech", copy: "A broker-free rental platform connecting owners and tenants directly.", className: "iv-project--cyan", to: "/case-study/nivassetu", tech: "Flutter · NestJS · PostgreSQL" },
+  { number: "03", name: "CRM Vision", category: "Business Systems", copy: "A secure workspace for client operations and sales visibility.", className: "iv-project--lime", to: "/case-study/crm-infovision", tech: "Next.js · Docker · Postgres" },
+];
 
-HeroSection.displayName = "HeroSection";
+const faqs = [
+  ["What does InfoVision build?", "We design and engineer web platforms, mobile applications, applied AI systems and the infrastructure behind them. Engagements can start from an early concept or an existing product that needs a serious upgrade."],
+  ["Can you work with an existing codebase?", "Yes. We begin with a focused technical and product audit, identify the highest-impact improvements, and work in reviewable milestones without risking live data or production stability."],
+  ["Do you work outside India?", "Yes. InfoVision is based in Surat, Gujarat and works remotely with teams across time zones using clear written updates, demos and milestone-based delivery."],
+  ["How do we start?", "Send a short description of the product, current stage and desired outcome. You will receive a practical response covering fit, next steps and the information needed for an accurate proposal."],
+];
 
-const SkillsSection = memo(() => (
-  <section className="skills-section section">
-    <div className="container">
-      <div className="section__header text-center">
-        <h2>Skills</h2>
-      </div>
-
-      <div className="skills__grid">
-        <span className="skill-tag">Frontend</span>
-        <span className="skill-tag">Backend</span>
-        <span className="skill-tag">DevOps</span>
-        <span className="skill-tag">ML Engineer</span>
-        <span className="skill-tag">DL Engineer</span>
-        <span className="skill-tag">3D Websites</span>
-        <span className="skill-tag">SaaS Projects</span>
-        <span className="skill-tag">Database Management</span>
-      </div>
-    </div>
-  </section>
-));
-
-SkillsSection.displayName = "SkillsSection";
-
-// Partner SVG Logos
-const McLarenLogo = () => (
-  <svg viewBox="0 0 140 30" fill="currentColor" className="partner-logo-svg" aria-label="McLaren">
-    <text x="5" y="22" fontFamily="var(--font-display), 'Outfit', sans-serif" fontWeight="800" fontStyle="italic" fontSize="19" letterSpacing="-0.03em">MCLAREN</text>
-    <path d="M112,8 C118,8 131,14 131,16 C131,18 118,24 112,24 C109,24 121,18 121,16 C121,14 109,8 112,8 Z" fill="#ff1a1a" />
-  </svg>
-);
-
-const CrmVisionLogo = () => (
-  <svg viewBox="0 0 140 30" fill="currentColor" className="partner-logo-svg" aria-label="CRM Vision">
-    <circle cx="15" cy="15" r="8" stroke="currentColor" strokeWidth="2" fill="none" />
-    <polygon points="15,10 19,18 11,18" fill="currentColor" />
-    <text x="30" y="20" fontFamily="var(--font-display), 'Outfit', sans-serif" fontWeight="700" fontSize="13" letterSpacing="0.05em">CRM VISION</text>
-  </svg>
-);
-
-const NivasSetuLogo = () => (
-  <svg viewBox="0 0 150 30" fill="currentColor" className="partner-logo-svg" aria-label="NivasSetu">
-    <path d="M15,6 L26,15 L23,15 L23,24 L17,24 L17,19 L13,19 L13,24 L7,24 L7,15 L4,15 Z" fill="currentColor" />
-    <text x="35" y="21" fontFamily="var(--font-display), 'Outfit', sans-serif" fontWeight="600" fontSize="15" letterSpacing="-0.02em">NivasSetu</text>
-  </svg>
-);
-
-const SiferaLogo = () => (
-  <svg viewBox="0 0 120 30" fill="currentColor" className="partner-logo-svg" aria-label="Sifera AI">
-    <polygon points="15,6 25,11 25,21 15,26 5,21 5,11" stroke="currentColor" strokeWidth="2" fill="none" />
-    <circle cx="15" cy="16" r="3" fill="currentColor" />
-    <text x="35" y="20" fontFamily="var(--font-display), 'Outfit', sans-serif" fontWeight="700" fontSize="14" letterSpacing="0.05em">SIFERA</text>
-  </svg>
-);
-
-const AchyutamLogo = () => (
-  <svg viewBox="0 0 140 30" fill="currentColor" className="partner-logo-svg" aria-label="Achyutam">
-    <path d="M15,5 L25,23 L5,23 Z M15,10 L10,20 L20,20 Z" fill="currentColor" />
-    <text x="32" y="20" fontFamily="var(--font-display), 'Outfit', sans-serif" fontWeight="700" fontSize="13" letterSpacing="0.02em">ACHYUTAM</text>
-  </svg>
-);
-
-const TrilunaFashionLogo = () => (
-  <svg viewBox="0 0 160 30" fill="currentColor" className="partner-logo-svg" aria-label="Triluna Fashion">
-    <path d="M15,6 Q20,12 25,6 Q20,20 15,6" fill="none" stroke="currentColor" strokeWidth="2" />
-    <circle cx="20" cy="12" r="2" fill="currentColor" />
-    <text x="35" y="21" fontFamily="var(--font-display), 'Outfit', sans-serif" fontWeight="700" fontSize="14" letterSpacing="0.05em">TRILUNA</text>
-  </svg>
-);
-
-const ClientsSection = memo(() => (
-  <section className="clients-section section">
-    <div className="container">
-      <div className="section__header text-center">
-        <h2>Trusted By</h2>
-        <p style={{ color: "var(--svc-text-secondary)", marginTop: "1rem", fontSize: "1.1rem" }}>
-          Powering digital experiences and cloud ecosystems for high-growth teams.
-        </p>
-      </div>
-      <div className="partner-logos-container">
-        <div className="partner-logo-card">
-          <McLarenLogo />
-        </div>
-        <div className="partner-logo-card">
-          <CrmVisionLogo />
-        </div>
-        <div className="partner-logo-card">
-          <NivasSetuLogo />
-        </div>
-        <div className="partner-logo-card">
-          <SiferaLogo />
-        </div>
-        <div className="partner-logo-card">
-          <AchyutamLogo />
-        </div>
-        <div className="partner-logo-card">
-          <TrilunaFashionLogo />
-        </div>
-      </div>
-    </div>
-  </section>
-));
-
-ClientsSection.displayName = "ClientsSection";
-
-const BigTextSection = memo(() => (
-  <section
-    className="section"
-    style={{
-      padding: "4rem 0 4rem",
-      textAlign: "center",
-      overflow: "hidden",
-      background: "transparent",
-    }}
-  >
-    <div className="container">
-      <h2
-        style={{
-          fontSize: "clamp(3rem, 15vw, 12rem)",
-          fontWeight: 900,
-          color: "white",
-          letterSpacing: "-0.05em",
-          lineHeight: 1,
-          margin: 0,
-          opacity: 0.9,
-        }}
-      >
-        INFOVISION
-      </h2>
-    </div>
-  </section>
-));
-
-BigTextSection.displayName = "BigTextSection";
-
-// 1. Services Preview Component
-const ServicesPreviewSection = memo(() => (
-  <section className="home-services-preview section">
-    <div className="container">
-      <div className="section__header text-center">
-        <h2>Featured Services</h2>
-        <p style={{ color: "var(--svc-text-secondary)", marginTop: "1rem" }}>
-          Explore our core capabilities built for enterprise performance and visibility.
-        </p>
-      </div>
-      <div className="services-preview__grid">
-        <div className="services-preview__card">
-          <div className="services-preview__icon">
-            <FaCode />
-          </div>
-          <h3 className="services-preview__title">Web Development</h3>
-          <p className="services-preview__desc">
-            Custom client-side and server-side web platforms built with React, Next.js, and Node.js. Optimized for performance and search crawlers.
-          </p>
-          <Link to="/services/web-development" className="services-preview__link">
-            Learn More <FaArrowRight />
-          </Link>
-        </div>
-
-        <div className="services-preview__card">
-          <div className="services-preview__icon">
-            <FaMobileAlt />
-          </div>
-          <h3 className="services-preview__title">Flutter Mobile Apps</h3>
-          <p className="services-preview__desc">
-            High-performance cross-platform iOS and Android mobile solutions compile directly to ARM code. Feature-rich, fluid, and robust.
-          </p>
-          <Link to="/services/flutter-development" className="services-preview__link">
-            Learn More <FaArrowRight />
-          </Link>
-        </div>
-
-        <div className="services-preview__card">
-          <div className="services-preview__icon">
-            <FaBrain />
-          </div>
-          <h3 className="services-preview__title">AI & ML Integration</h3>
-          <p className="services-preview__desc">
-            Integrate smart machine learning, neural networks, OpenAI API, and specialized LLM deployment directly into your current databases.
-          </p>
-          <Link to="/services/ai-development" className="services-preview__link">
-            Learn More <FaArrowRight />
-          </Link>
-        </div>
-      </div>
-      <div className="text-center" style={{ marginTop: "3rem" }}>
-        <Link to="/services">
-          <Button variant="outline">View All Services</Button>
-        </Link>
-      </div>
-    </div>
-  </section>
-));
-
-ServicesPreviewSection.displayName = "ServicesPreviewSection";
-
-// 2. Testimonials Component
-const TestimonialsSection = memo(() => (
-  <section className="testimonials-section section">
-    <div className="container">
-      <div className="section__header text-center">
-        <h2>Client Testimonials</h2>
-        <p style={{ color: "var(--svc-text-secondary)", marginTop: "1rem" }}>
-          What our partners say about delivering projects on time with premium quality.
-        </p>
-      </div>
-      <div className="testimonials__grid">
-        <div className="testimonial-card">
-          <p className="testimonial-quote">
-            "InfoVision delivered our enterprise CRM platform ahead of schedule. The Docker setup and NestJS backend scale seamlessly under heavy workloads. Shivam's technical expertise is outstanding."
-          </p>
-          <div className="testimonial-client">
-            <div className="testimonial-avatar">A</div>
-            <div className="testimonial-info">
-              <span className="testimonial-name">Alex Rivera</span>
-              <span className="testimonial-company">Operations Director, CRM Vision</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="testimonial-card">
-          <p className="testimonial-quote">
-            "InfoVision built our premium saree store with headless commerce integration. The page speed and seamless catalog filtering are spectacular. Highly recommend their work!"
-          </p>
-          <div className="testimonial-client">
-            <div className="testimonial-avatar">Y</div>
-            <div className="testimonial-info">
-              <span className="testimonial-name">Yogesh Vaghani</span>
-              <span className="testimonial-company">Founder, Triluna Fashion</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="testimonial-card">
-          <p className="testimonial-quote">
-            "Shivam developed our zero-brokerage listing portal using NestJS and React. The Aadhaar KYC verification flows and spatial geocoding search work perfectly. Maintenance is incredibly clean."
-          </p>
-          <div className="testimonial-client">
-            <div className="testimonial-avatar">S</div>
-            <div className="testimonial-info">
-              <span className="testimonial-name">Sophia Patel</span>
-              <span className="testimonial-company">Co-Founder, NivasSetu</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-));
-
-TestimonialsSection.displayName = "TestimonialsSection";
-
-// 3. FAQ Accordion Component
-const FaqSection = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const faqs = [
-    {
-      q: "What services does InfoVision provide?",
-      a: "InfoVision specializes in enterprise software solutions, custom full-stack web applications (React/Node.js/TypeScript), cross-platform mobile apps (Flutter/React Native), immersive 3D/WebGL experiences (Three.js), and custom AI model fine-tuning & LLM integrations."
-    },
-    {
-      q: "How do you ensure site performance and SEO?",
-      a: "We engineer sites for maximum performance under Core Web Vitals guidelines (LCP, FID, CLS, INP). We implement dynamic schema.org JSON-LD scripts, optimize code bundles with code-splitting, serve compressed WebP media, and maintain structured internal link frameworks to boost crawlability for standard search and AI-GEO."
-    },
-    {
-      q: "What is your typical software development lifecycle?",
-      a: "Our typical engagement includes four primary phases: 1) Discovery & Solution Architecture, 2) Agile UI/UX Design & Prototyping, 3) Iterative Sprint Development with full type safety, and 4) Automated testing, Docker packaging, CI/CD pipeline set up, and production deployment."
-    },
-    {
-      q: "Where are you located and do you support remote clients?",
-      a: "Our core development center is located in Surat, Gujarat, India, with remote teams servicing clients globally. We coordinate schedules to ensure seamless daily communication across all timezones."
-    }
-  ];
-
-  const toggleFaq = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+export const Home = () => {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (
-    <section className="faq-section section">
-      <div className="container">
-        <div className="section__header text-center">
-          <h2>Frequently Asked Questions</h2>
-          <p style={{ color: "var(--svc-text-secondary)", marginTop: "1rem" }}>
-            Got questions? We have compiled responses to common software engagement topics.
-          </p>
-        </div>
-        <div className="faq-list">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className={`faq-item ${openIndex === index ? "faq-item--open" : ""}`}
-            >
-              <button className="faq-question" onClick={() => toggleFaq(index)}>
-                <span>{faq.q}</span>
-                <span className="faq-toggle">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19" className="vertical-bar" />
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                  </svg>
-                </span>
-              </button>
-              <div className="faq-answer">
-                <p>{faq.a}</p>
-              </div>
+    <main className="iv-home" id="top">
+      <section className="iv-home-hero">
+        <div className="container iv-home-hero__grid">
+          <motion.div className="iv-home-hero__copy" initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8 }}>
+            <span className="iv-kicker">Software engineering studio · Surat</span>
+            <h1>We turn ambitious ideas into <em>dependable products.</em></h1>
+            <p>InfoVision designs and engineers high-performance web platforms, mobile applications, AI systems and the infrastructure that keeps them moving.</p>
+            <div className="iv-home-hero__actions">
+              <Link to="/contact" className="iv-btn iv-btn--light">Start a project <span className="iv-arrow">↗</span></Link>
+              <Link to="/work" className="iv-btn iv-btn--ghost">Explore selected work <span className="iv-arrow">↗</span></Link>
             </div>
+          </motion.div>
+
+          <motion.div className="iv-system-visual" initial={{ opacity: 0, scale: .92 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: .2 }} aria-hidden="true">
+            <div className="iv-system-visual__orbit iv-system-visual__orbit--one" />
+            <div className="iv-system-visual__orbit iv-system-visual__orbit--two" />
+            <div className="iv-system-core"><span>IV</span><small>System online</small></div>
+            <div className="iv-system-node iv-system-node--ai"><i />AI layer</div>
+            <div className="iv-system-node iv-system-node--data"><i />Data</div>
+            <div className="iv-system-node iv-system-node--ship"><i />Ship</div>
+            <div className="iv-system-console"><span>Production</span><b>99.9% healthy</b><i><em /></i></div>
+          </motion.div>
+        </div>
+        <div className="iv-home-hero__foot container">
+          <span>Scroll to explore</span><i />
+          <span>Strategy · Design · Engineering · Scale</span>
+        </div>
+      </section>
+
+      <section className="iv-capability-ticker" aria-label="Capabilities">
+        <div>{["Product engineering", "Artificial intelligence", "Mobile applications", "Cloud systems", "Product engineering", "Artificial intelligence", "Mobile applications", "Cloud systems"].map((item, index) => <span key={`${item}-${index}`}><i>✦</i>{item}</span>)}</div>
+      </section>
+
+      <section className="iv-intro section">
+        <div className="container iv-intro__grid">
+          <span className="iv-kicker">What we do</span>
+          <h2>One engineering partner from first decision to <em>production.</em></h2>
+          <p>We bring product thinking, interface design and dependable technical execution into the same room. That means fewer hand-offs, clearer decisions and software built around the outcome, not the trend.</p>
+        </div>
+      </section>
+
+      <section className="iv-services-home">
+        <div className="container iv-services-home__grid">
+          {services.map((service) => (
+            <Link key={service.number} to="/services" className="iv-service-card" data-cursor="view">
+              <div className="iv-service-card__top"><span>{service.number}</span><span className="iv-arrow">↗</span></div>
+              <div><h3>{service.title}</h3><p>{service.copy}</p></div>
+              <div className="iv-service-card__tags">{service.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+            </Link>
           ))}
         </div>
-      </div>
-    </section>
-  );
-};
+      </section>
 
-export const Home: React.FC = () => {
-  return (
-    <main className="home">
-      <HeroSection />
-      <SkillsSection />
-      <ParticleSection />
+      <section className="iv-work-home section">
+        <div className="container">
+          <div className="iv-section-heading"><span className="iv-kicker">Selected work</span><h2>Products built to create <em>real movement.</em></h2><Link to="/work">View every project <span className="iv-arrow">↗</span></Link></div>
+          <div className="iv-projects-home">
+            {projects.map((project) => (
+              <Link key={project.number} to={project.to} className={`iv-project-card ${project.className}`} data-cursor="view">
+                <div className="iv-project-card__meta"><span>{project.number}</span><span>{project.category}</span></div>
+                <div className="iv-project-card__visual"><div className="iv-project-ui"><i /><i /><i /><span /></div></div>
+                <div className="iv-project-card__copy"><small>{project.tech}</small><h3>{project.name}</h3><p>{project.copy}</p><b>Open case study ↗</b></div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      {/* Horizontal Logo Loop */}
-      <div style={{ padding: "0", opacity: 0.8 }}>
-        <LogoLoop
-          logos={techLogos}
-          speed={100}
-          direction="left"
-          logoHeight={80}
-          gap={100}
-          hoverSpeed={0}
-          scaleOnHover
-          fadeOut={true}
-          fadeOutColor="transparent"
-          ariaLabel="Technology stack"
-        />
-      </div>
+      <section className="iv-process section">
+        <div className="container iv-process__layout">
+          <div className="iv-process__heading"><span className="iv-kicker">How we work</span><h2>Clear enough to move <em>fast.</em></h2><p>No black box. Every engagement is split into visible decisions, reviewable work and measurable milestones.</p></div>
+          <div className="iv-process__steps">
+            {[["01","Frame","Clarify the business goal, users, constraints and definition of success."],["02","Design","Shape the experience and technical plan before expensive implementation."],["03","Engineer","Build in focused milestones with tests, review and regular working demos."],["04","Launch","Harden, deploy, monitor and improve the product using real usage signals."]].map(([n,title,copy]) => <article key={n}><span>{n}</span><h3>{title}</h3><p>{copy}</p></article>)}
+          </div>
+        </div>
+      </section>
 
-      {/* New SEO Optimized Sections */}
-      <ServicesPreviewSection />
-      <TestimonialsSection />
-      <FaqSection />
+      <section className="iv-principle">
+        <div className="container iv-principle__inner"><span>Our operating principle</span><blockquote>“The best software feels simple because the hard decisions were made <em>before</em> they reached the user.”</blockquote><p>InfoVision Digital · Product engineering studio</p></div>
+      </section>
 
-      <ClientsSection />
-      <BigTextSection />
+      <section className="iv-faq section">
+        <div className="container iv-faq__layout">
+          <div><span className="iv-kicker">Common questions</span><h2>Before we build.</h2><a href="mailto:vaghanishivam83@gmail.com">Ask something else ↗</a></div>
+          <div className="iv-faq__list">
+            {faqs.map(([question, answer], index) => <article key={question} className={openFaq === index ? "is-open" : ""}><button onClick={() => setOpenFaq(openFaq === index ? null : index)}><span>{question}</span><i>{openFaq === index ? "−" : "+"}</i></button><div><p>{answer}</p></div></article>)}
+          </div>
+        </div>
+      </section>
     </main>
   );
 };
