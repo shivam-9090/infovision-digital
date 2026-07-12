@@ -3,8 +3,10 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import { setupWebVitals } from "./utils/webVitals";
+import { installRouteRecovery } from "./utils/routeRecovery";
 
 if (typeof window !== "undefined") {
+  installRouteRecovery();
   setupWebVitals();
 }
 
