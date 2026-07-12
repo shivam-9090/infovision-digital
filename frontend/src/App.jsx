@@ -10,6 +10,8 @@ import { Navigation } from "./components/Navigation";
 import { Footer } from "./components/Footer";
 import { SeoManager } from "./components/SeoManager";
 import { SiteEffects } from "./components/SiteEffects";
+import { RouteErrorBoundary } from "./components/RouteErrorBoundary";
+import { markRouteStable } from "./utils/routeRecovery";
 import { Home } from "./pages/Home";
 import { Services } from "./pages/Services";
 import { Work } from "./pages/Work";
@@ -26,8 +28,16 @@ import { Blog } from "./pages/Blog";
 
 const ScrollManager = () => {
   const location = useLocation();
-  useEffect(() => window.scrollTo({ top: 0, behavior: "instant" }), [location.pathname]);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+    markRouteStable(location.pathname);
+  }, [location.pathname]);
   return null;
+};
+
+const RouteBoundary = ({ children }) => {
+  const location = useLocation();
+  return <RouteErrorBoundary routeKey={location.pathname}>{children}</RouteErrorBoundary>;
 };
 
 const AppShell = () => (
@@ -37,7 +47,8 @@ const AppShell = () => (
     <SiteEffects />
     <Navigation />
     <div className="app-main">
-      <Routes>
+      <RouteBoundary>
+        <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services/:slug" element={<Services />} />
@@ -66,7 +77,8 @@ const AppShell = () => (
           <Route path="/cookies" element={<CookiesPolicy />} />
           <Route path="/cookie-policy" element={<CookiesPolicy />} />
           <Route path="*" element={<NotFound />} />
-      </Routes>
+        </Routes>
+      </RouteBoundary>
     </div>
     <Footer />
   </div>
