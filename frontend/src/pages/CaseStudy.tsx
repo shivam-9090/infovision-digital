@@ -704,6 +704,11 @@ export const CaseStudy: React.FC = () => {
 
     const steps = journeyRef.current.querySelectorAll(".journey-step");
 
+    if (!("IntersectionObserver" in window)) {
+      steps.forEach((step) => step.classList.add("journey-step--visible"));
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
