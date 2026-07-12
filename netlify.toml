@@ -51,7 +51,9 @@
   [headers.values]
     # HTML and SPA route responses must revalidate after every deployment.
     # Fingerprinted files under /assets keep their immutable cache rule below.
-    Cache-Control = "public, max-age=0, must-revalidate"
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    CDN-Cache-Control = "no-store"
+    Netlify-CDN-Cache-Control = "no-store"
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
